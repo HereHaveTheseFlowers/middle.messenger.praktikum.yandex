@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../../styles.sass" />
+    </head>
+    <body style="overflow: hidden">
+        <main class="flexcontainer">
+
+            <div class="mainlogo flexcontainer__dualcontainer">
+                {{>mainlogo }}
+            </div>
+
+            <div class="login flexcontainer__dualcontainer">
+                <h2 class="login__description">Chat that feels warm and comfy</h2>
+
+                <div class="login__circle">
+                    <svg class="login__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 227.8 195.6">
+                        <use xlink:href="#logo-svg"/>
+                    </svg>
+                    <form class="login__form">
+                        <h2 class="login__formname">Log In to Vacate</h2>
+                        <div class="login__field">
+                            <input name="login" class="login__input" placeholder="Login">
+                        </div>
+                        <div class="login__field">
+                            <input name="password" class="login__input" placeholder="Password">
+                        </div>
+                        {{>button label="Sign In" added_class="login__submit animate-click"}}
+                        {{>button label="Create account" added_class="login__createaccount animate-click" shape_dir="none"}}
+                    </form>
+                </div>
+            </div>
+
+        </main>
+        <script src="./login.js" type="module"></script>
+    </body>
+</html> 

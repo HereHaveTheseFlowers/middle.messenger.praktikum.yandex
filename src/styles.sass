@@ -1,0 +1,56 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap'
+
+@import './utils/vars.sass'
+
+@import './components/arrow/arrow.sass'
+@import './components/button/button.sass'
+@import './components/error/error.sass'
+@import './components/mainlogo/mainlogo.sass'
+
+@import './pages/login/login.sass'
+@import './pages/registration/registration.sass'
+@import './pages/options/options.sass'
+
+*
+    box-sizing: border-box
+html
+    font-family: 'Inter', sans-serif
+    background: $color_bg
+
+body
+    margin: 0
+*::selection
+    color: $color_normal
+    background-color: $color_light
+    text-shadow: none
+    mix-blend-mode: multiply
+h2
+    margin-block: 0
+.temp__links__a
+    font-size: 20px
+    font-family: Helvetica
+    margin-top: 20px
+    color: black
+    text-decoration: none
+
+.temp__links__container
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.flexcontainer
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+
+.flexcontainer__dualcontainer
+    width: 50%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center

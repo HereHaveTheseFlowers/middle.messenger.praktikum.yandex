@@ -1,0 +1,161 @@
+.button__goback
+    position: absolute
+    width: 60px
+    height: 60px
+    left: 18px
+    border-radius: 50%
+    border: 0
+    background: $color_light
+    cursor: pointer
+    display: flex
+    justify-content: center
+    align-items: center
+
+.button__goback:focus
+    outline: none
+    box-shadow: none
+    opacity: 0.95
+
+.options
+    flex-direction: column
+
+.avatar
+    position: relative
+    border-radius: 50%
+    width: 130px
+    height: 130px
+    background: $color_light
+    overflow: hidden
+
+.avatar__image
+    position: absolute
+    height: 100%
+    width: auto
+
+.avatar__edit
+    position: absolute
+    height: 100%
+    width: 100%
+    opacity: 0
+    cursor: pointer
+    transition: 0.4s
+    background: rgba($color_dark, 0.5)
+    border: 0
+    font-family: 'Inter', sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 13px
+    color: $color_light
+
+.avatar__edit:hover
+    opacity: 1
+
+.options__attribute__sizebig
+    color: $color_dark
+    font-style: normal
+    font-weight: 600
+    font-size: 16px
+    margin-top: 21px
+
+.options__container
+    background: $color_normal
+    width: 558px
+    border-radius: 50px
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
+    padding: 23
+    margin-top: 24px
+
+.options__row
+    position: relative
+    width: 100%
+    height: 33px
+    display: flex
+    align-items: center
+    border-top: 1px solid $color_light
+
+.options__row:first-child
+    border-top: 0px
+
+.options__attribute
+    color: $color_dark
+    font-style: normal
+    font-weight: 500
+    font-size: 13px
+
+input.options__attribute
+    border: none
+    background: none
+    font-family: 'Inter', sans
+    text-align: right
+
+input.options__attribute:active,
+input.options__attribute:focus,
+input.options__attribute:hover
+    outline: none
+
+.options__attribute__right
+    position: absolute
+    right: 0
+
+.options__button
+    margin-top: 12px
+
+.options__button__changepassword
+    float: right
+
+.options__editinfo
+    display: none
+    
+.options__editpassword
+    display: none
+
+.avatarupload
+    display: none
+    opacity: 0
+    transition: 0.4s
+    position: absolute
+    width: 100%
+    height: 100%
+    justify-content: center
+    align-items: center
+
+.avatarupload__background
+    position: absolute
+    width: 100%
+    height: 100%
+    background: rgba(black, 0.4)
+
+.avatarupload__form
+    z-index: 9999
+    display: flex
+    flex-direction: column
+    justify-content: space-evenly
+    align-items: center
+    width: 340px
+    height: 257px
+    background: $color_normal
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
+    border-radius: 50px
+
+.avatarupload__title
+    font-weight: 500
+    font-size: 15px
+    color: $color_dark
+
+.avatarupload__label
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    text-align: center
+    text-decoration-line: underline
+    color: $color_dark
+
+.avatarupload__label:hover 
+    cursor: pointer
+
+.avatarupload__input
+    width: 0.1px
+    height: 0.1px
+    opacity: 0
+    position: absolute
+    z-index: -10
