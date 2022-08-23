@@ -1,3 +1,7 @@
+---
+auth: [ { title: "Login",          name: "login",          type: "text",        placeholder: "Login"}, 
+        { title: "Password",       name: "password",       type: "password",    placeholder: "Password"}]
+---
 <html>
     <head>
         <link rel="stylesheet" href="../../styles.sass" />
@@ -18,12 +22,9 @@
                     </svg>
                     <form class="login__form">
                         <h2 class="login__formname">Log In to Vacate</h2>
-                        <div class="login__field">
-                            <input name="login" class="login__input" placeholder="Login">
-                        </div>
-                        <div class="login__field">
-                            <input name="password" class="login__input" placeholder="Password">
-                        </div>
+                        {{#each auth}}
+                            {{>auth_row name=this.name type=this.type placeholder=this.placeholder}}
+                        {{/each}}
                         {{>button label="Sign In" added_class="login__submit animate-click"}}
                         {{>button label="Create account" added_class="login__createaccount animate-click" shape_dir="none"}}
                     </form>
