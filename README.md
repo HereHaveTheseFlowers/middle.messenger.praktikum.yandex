@@ -15,3 +15,5 @@ The following are the commands required to run the project:
 - `npm run start` — build and launch the project on port 3000 using Express and Parcel.
 - `npm run dev` — build and run using Parcel to work on the project.
 - `npm run build` — build the project using Parcel.
+- `$env:PORT="8000" ; npm run start` — same as the above, but the project starts on the port of your choice. For Windows users.
+- `PORT=4444 npm run start` — same as the above, but for Mac users.
