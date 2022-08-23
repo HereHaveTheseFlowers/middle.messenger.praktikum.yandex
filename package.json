@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "rimraf ./dist/ & rimraf ./.parcel-cache/ & parcel src/index.hbs",
-    "build": "rimraf ./dist/ & rimraf ./.parcel-cache/ & parcel build src/index.hbs",
-    "start": "rimraf ./dist/ & rimraf ./.parcel-cache/ & parcel build src/index.hbs & node server.js"
+    "clean": "rimraf ./dist/ && rimraf ./.parcel-cache/",
+    "dev": "npm run clean && parcel src/index.hbs",
+    "build": "npm run clean && parcel build src/index.hbs",
+    "start": "npm run clean && parcel build src/index.hbs && node server.js"
   },
   "keywords": [],
   "author": "",
