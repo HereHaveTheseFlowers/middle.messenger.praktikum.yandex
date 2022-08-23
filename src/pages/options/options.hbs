@@ -1,3 +1,15 @@
+---
+titles: [{ title: "Email",          name: "email",          type: "text"}, 
+         { title: "Login",          name: "login",          type: "text"}, 
+         { title: "First Name",     name: "first_name",     type: "text"}, 
+         { title: "Last Name",      name: "second_name",    type: "text"}, 
+         { title: "Displayed Name", name: "display_name",   type: "text"}, 
+         { title: "Phone",          name: "phone",          type: "text"}]
+
+titles_editpassword: [  { title: "Old password",         name: "oldPassword", type: "password", placeholder: "•••••••••" }, 
+                        { title: "New Password",         name: "newPassword", type: "password", placeholder: "•••••••••••" }, 
+                        { title: "New Password (Again)", name: "newPassword", type: "password", placeholder: "•••••••••••" }]
+---
 <html>
     <head>
         <link rel="stylesheet" href="../../styles.sass" />
@@ -13,78 +25,27 @@
             </div>
             <div class="options__attribute__sizebig"></div>
             <div class="options__container options__profile">
-                <div class="options__row">
-                    <span class="options__attribute options__attribute__left">Email</span>
-                    <span class="options__attribute options__attribute__right options__email"></span>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Login</div>
-                    <div class="options__attribute options__attribute__right options__login"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">First Name</div>
-                    <div class="options__attribute options__attribute__right options__firstname"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Last Name</div>
-                    <div class="options__attribute options__attribute__right options__lastname"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Displayed Name</div>
-                    <div class="options__attribute options__attribute__right"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Phone</div>
-                    <div class="options__attribute options__attribute__right"></div>
-                </div>
+                {{#each  titles }} 
+                    {{>options_row attr_first=this.title}}
+                {{/each  }} 
                 {{> button label="Edit info" shape_dir="left" added_class="options__button options__button__editinfo animate-click" }}
                 {{> button label="Change password" shape_dir="right" added_class="options__button options__button__changepassword animate-click" }}
                 {{> button label="Back to chats" shape_dir="left" added_class="options__button options__button__backtochats animate-click" }}
             </div>
 
             <form class="options__container options__editinfo">
-                <div class="options__row">
-                    <span class="options__attribute options__attribute__left">Email</span>
-                    <input name="email" type="text" class="options__attribute options__attribute__right options__email">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Login</div>
-                    <input name="login" type="text" class="options__attribute options__attribute__right options__login">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">First Name</div>
-                    <input name="first_name" type="text" class="options__attribute options__attribute__right options__firstname">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Last Name</div>
-                    <input name="second_name" type="text" class="options__attribute options__attribute__right options__lastname">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Displayed Name</div>
-                    <input name="display_name" type="text" class="options__attribute options__attribute__right">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Phone</div>
-                    <input name="phone" type="text" class="options__attribute options__attribute__right">
-                </div>
+                {{#each  titles}} 
+                    {{>options_row attr_first=this.title input="true" input_name=this.name input_type=this.type}}
+                {{/each  }} 
                 <div style="display: flex; justify-content: center">
                     {{> button label="Save" added_class="options__button options__button__saveinfo animate-click" }}
                 </div>
             </form>
 
             <form class="options__container options__editpassword">
-                <div class="options__row">
-                    <span class="options__attribute options__attribute__left">Old password</span>
-                    <input type="password" name="oldPassword" placeholder="•••••••••"  class="options__attribute options__attribute__right options__email">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">New password</div>
-                    <input type="password" name="newPassword" placeholder="•••••••••••" class="options__attribute options__attribute__right options__login">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">New password (again)</div>
-                    <input type="password" name="newPassword" placeholder="•••••••••••" class="options__attribute options__attribute__right options__firstname">
-                </div>
+                {{#each  titles_editpassword}} 
+                    {{>options_row attr_first=this.title input="true" input_name=this.name input_type=this.type input_placeholder=this.placeholder}}
+                {{/each  }}
                 <div style="display: flex; justify-content: center">
                     {{> button label="Save" added_class="options__button options__button__savepassword animate-click" }}
                 </div>
