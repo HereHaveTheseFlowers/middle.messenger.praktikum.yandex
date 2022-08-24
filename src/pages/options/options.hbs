@@ -1,0 +1,66 @@
+---
+titles: [{ title: "Email",          name: "email",          type: "text"}, 
+         { title: "Login",          name: "login",          type: "text"}, 
+         { title: "First Name",     name: "first_name",     type: "text"}, 
+         { title: "Last Name",      name: "second_name",    type: "text"}, 
+         { title: "Displayed Name", name: "display_name",   type: "text"}, 
+         { title: "Phone",          name: "phone",          type: "text"}]
+
+titles_editpassword: [  { title: "Old password",         name: "oldPassword", type: "password", placeholder: "•••••••••" }, 
+                        { title: "New Password",         name: "newPassword", type: "password", placeholder: "•••••••••••" }, 
+                        { title: "New Password (Again)", name: "newPassword", type: "password", placeholder: "•••••••••••" }]
+---
+<html>
+    <head>
+        <link rel="stylesheet" href="../../styles.sass" />
+    </head>
+    <body>
+        <main class="flexcontainer options">
+            <button class="button__goback animate-click">
+                {{>arrow flip="true"}}
+            </button>
+            <div class="avatar">
+                <img src="../../img/avatar.svg" alt="Your profile picture" class="avatar__image">
+                <button class="avatar__edit">Change<br>Avatar</button>
+            </div>
+            <div class="options__attribute__sizebig"></div>
+            <div class="options__container options__profile">
+                {{#each  titles }} 
+                    {{>options_row attr_first=this.title}}
+                {{/each  }} 
+                {{> button label="Edit info" shape_dir="left" added_class="options__button options__button__editinfo animate-click" }}
+                {{> button label="Change password" shape_dir="right" added_class="options__button options__button__changepassword animate-click" }}
+                {{> button label="Back to chats" shape_dir="left" added_class="options__button options__button__backtochats animate-click" }}
+            </div>
+
+            <form class="options__container options__editinfo">
+                {{#each  titles}} 
+                    {{>options_row attr_first=this.title input="true" input_name=this.name input_type=this.type}}
+                {{/each  }} 
+                <div style="display: flex; justify-content: center">
+                    {{> button label="Save" added_class="options__button options__button__saveinfo animate-click" }}
+                </div>
+            </form>
+
+            <form class="options__container options__editpassword">
+                {{#each  titles_editpassword}} 
+                    {{>options_row attr_first=this.title input="true" input_name=this.name input_type=this.type input_placeholder=this.placeholder}}
+                {{/each  }}
+                <div style="display: flex; justify-content: center">
+                    {{> button label="Save" added_class="options__button options__button__savepassword animate-click" }}
+                </div>
+            </form>
+
+            <div class="avatarupload">
+                <div class="avatarupload__background"></div>
+                <form class="avatarupload__form">
+                    <span class="avatarupload__title">Upload a file</span>
+                    <label for="fileupload" class="avatarupload__label">Choose a file on your computer</label>
+                    <input type="file" id="fileupload" name="avatar" class="avatarupload__input" multiple>
+                    {{> button label="Submit" added_class="animate-click" }}
+                </form>
+            </div>
+        </main>
+        <script src="./options.js" type="module"></script>
+    </body>
+</html> 

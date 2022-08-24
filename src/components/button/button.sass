@@ -1,0 +1,39 @@
+.button
+    position: relative
+    width: 280px
+    height: 37px
+    background: $color_light
+    border-radius: 15px
+    color: $color_dark
+    font-family: 'Inter', sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 11px
+    border: 0
+    cursor: pointer
+
+.button__shape
+    border-radius: 100%
+    position: absolute
+    width: 18px
+    height: 17px
+    top: 5px
+    background: conic-gradient(from -35.87deg at 30.56% 52.94%, $color_light 0deg, $color_light 74.96deg, rgba(0, 0, 0, 0) 75deg, rgba(0, 0, 0, 0) 360deg)
+
+.button__shape__right
+    right: -11px
+
+.button__shape__left
+    left: -11px
+    transform: rotateY(180deg)
+
+.button__shape__none
+    display: none
+
+.button:focus
+    box-shadow: none
+    opacity: 0.95
+
+.button:hover
+    opacity: 0.8
