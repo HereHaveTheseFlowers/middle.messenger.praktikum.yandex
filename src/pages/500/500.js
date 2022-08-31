@@ -1,5 +1,5 @@
 import animateClick  from '../../utils/animateClick.js';
-import template from './404.hbs';
+import template from './500.hbs';
 import '../../components/button';
 import '../../components/error';
 
@@ -18,7 +18,6 @@ function pageStartup() {
       });
   }
 }
-
 window.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('#app');
 
