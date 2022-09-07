@@ -1,4 +1,4 @@
-import animateClick  from '../../utils/animateClick.js';
+import animateClick  from '../../utils/animateClick';
 import template from './registration.hbs';
 import '../../components/button';
 import '../../components/mainlogo';
@@ -15,7 +15,7 @@ const data = [  { title: "Email",          name: "email",          type: "text",
 window.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('#app');
 
-  app.innerHTML = template({ auth: data });
+  if(app) app.innerHTML = template({ auth: data });
   for(let el of document.querySelectorAll(".animate-click")) {
       el.addEventListener("click", function() {
           animateClick(el);

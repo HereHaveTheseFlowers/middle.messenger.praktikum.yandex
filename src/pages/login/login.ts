@@ -1,16 +1,19 @@
-import animateClick  from '../../utils/animateClick.js';
+import animateClick  from '../../utils/animateClick';
 import template from './login.hbs';
 import '../../components/button';
 import '../../components/mainlogo';
 import '../../components/auth_row';
 
-let data = [    { title: "Login",          name: "login",          type: "text",        placeholder: "Login"}, 
-                { title: "Password",       name: "password",       type: "password",    placeholder: "Password"}]
+type Nullable<T> = T | null;
+
+let data: Array<object> = [ { title: "Login",          name: "login",          type: "text",        placeholder: "Login"}, 
+                            { title: "Password",       name: "password",       type: "password",    placeholder: "Password"}]
 
 window.addEventListener('DOMContentLoaded', () => {
-  const app = document.querySelector('#app');
+  const app: Nullable<HTMLDivElement> = document.querySelector('#app');
 
-  app.innerHTML = template({ auth: data });
+  if(app) app.innerHTML = template({ auth: data });
+
   for(let el of document.querySelectorAll(".animate-click")) {
       el.addEventListener("click", function() {
           animateClick(el);

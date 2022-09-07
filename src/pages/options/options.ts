@@ -1,22 +1,22 @@
-import animateClick from '../../utils/animateClick.js';
-import hasClass from '../../utils/hasClass.js';
+import animateClick from '../../utils/animateClick';
+import hasClass from '../../utils/hasClass';
 import template from './options.hbs';
 import '../../components/button';
 import '../../components/arrow';
 import '../../components/options_row';
 import avatarsvg from 'url:../../img/avatar.svg';
 
-const titles = [{ title: "Email",          name: "email",          type: "text"}, 
-                { title: "Login",          name: "login",          type: "text"}, 
-                { title: "First Name",     name: "first_name",     type: "text"}, 
-                { title: "Last Name",      name: "second_name",    type: "text"}, 
-                { title: "Displayed Name", name: "display_name",   type: "text"}, 
-                { title: "Phone",          name: "phone",          type: "text"}]
+const titles: Array<object> = [{ title: "Email",          name: "email",          type: "text"}, 
+                                { title: "Login",          name: "login",          type: "text"}, 
+                                { title: "First Name",     name: "first_name",     type: "text"}, 
+                                { title: "Last Name",      name: "second_name",    type: "text"}, 
+                                { title: "Displayed Name", name: "display_name",   type: "text"}, 
+                                { title: "Phone",          name: "phone",          type: "text"}]
 
-const titles_editpassword = [   { title: "Old password",         name: "oldPassword", type: "password", placeholder: "•••••••••"    }, 
-                                { title: "New Password",         name: "newPassword", type: "password", placeholder: "•••••••••••"  }, 
-                                { title: "New Password (Again)", name: "newPassword", type: "password", placeholder: "•••••••••••"  }]
-const userdata = {
+const titles_editpassword: Array<object>  = [   { title: "Old password",         name: "oldPassword", type: "password", placeholder: "•••••••••"    }, 
+                                                { title: "New Password",         name: "newPassword", type: "password", placeholder: "•••••••••••"  }, 
+                                                { title: "New Password (Again)", name: "newPassword", type: "password", placeholder: "•••••••••••"  }]
+const userdata: { [index: string]: string; } = {
     email: 'pochta@yandex.ru',
     login: 'ivanivanov',
     firstname: 'Ivan',
@@ -24,8 +24,8 @@ const userdata = {
     displayedname: 'Ivan',
     phone: '+7 (909) 967 30 30',
 }
-let avatarupload,
-avatarupload__background;
+let avatarupload: any;
+let avatarupload__background: any;
 
 // updates the .options__profile info
 function updateProfileInfo() {
@@ -34,8 +34,9 @@ function updateProfileInfo() {
     }
     for(let el of document.getElementsByClassName('options__profile')) {
         let i = 0;
-        for(let child of el.childNodes) {
+        for(let child of el.children) {
             if(hasClass(child, 'options__row')) {
+                if(!child.lastElementChild) return
                 child.lastElementChild.textContent = Object.entries(userdata)[i][1];
                 i++;
             }
@@ -43,17 +44,23 @@ function updateProfileInfo() {
     }
     for(let el of document.getElementsByClassName('options__editinfo')) {
         let i = 0;
-        for(let child of el.childNodes) {
+        for(let child of el.children) {
             if(hasClass(child, 'options__row')) {
-                child.lastElementChild.value = Object.entries(userdata)[i][1];
+                if(!child.lastElementChild) return
+                let inputv: HTMLInputElement = <HTMLInputElement>child.lastElementChild
+                inputv.value = Object.entries(userdata)[i][1];
                 i++;
             }
         }
     }
 }
 
+
 function pageStartup() {
-    document.querySelector('.avatar__image').src = avatarsvg
+    let avImage: HTMLImageElement | null = document.querySelector('.avatar__image')
+    if(avImage) {
+        avImage.src = avatarsvg
+    }
     for(let el of document.querySelectorAll(".avatarupload")) {
         avatarupload = el;
     }
@@ -86,33 +93,33 @@ function pageStartup() {
         }
         if(hasClass(el, "options__button__editinfo")) {
             el.addEventListener("click", function() {
-                for(let profile of document.getElementsByClassName('options__profile'))
+                for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
                     profile.style.display = 'none';
-                for(let profile of document.getElementsByClassName('options__editinfo'))
+                for(let profile of document.querySelectorAll<HTMLElement>('.options__editinfo'))
                     profile.style.display = 'block';
             });
         }
         if(hasClass(el, "options__button__saveinfo")) {
             el.addEventListener("click", function() {
-                for(let editinfo of document.getElementsByClassName('options__editinfo'))
+                for(let editinfo of document.querySelectorAll<HTMLElement>('.options__editinfo'))
                     editinfo.style.display = 'none';
-                for(let profile of document.getElementsByClassName('options__profile'))
+                for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
                     profile.style.display = 'block';
             });
         }
         if(hasClass(el, "options__button__changepassword")) {
             el.addEventListener("click", function() {
-                for(let profile of document.getElementsByClassName('options__profile'))
+                for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
                     profile.style.display = 'none';
-                for(let editpassword of document.getElementsByClassName('options__editpassword'))
+                for(let editpassword of document.querySelectorAll<HTMLElement>('.options__editpassword'))
                     editpassword.style.display = 'block';
             });
         }
         if(hasClass(el, "options__button__savepassword")) {
             el.addEventListener("click", function() {
-                for(let editpassword of document.getElementsByClassName('options__editpassword'))
+                for(let editpassword of document.querySelectorAll<HTMLElement>('.options__editpassword'))
                     editpassword.style.display = 'none';
-                for(let profile of document.getElementsByClassName('options__profile'))
+                for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
                     profile.style.display = 'block';
             });
         }
@@ -129,7 +136,7 @@ function pageStartup() {
 window.addEventListener('DOMContentLoaded', () => {
     const app = document.querySelector('#app');
   
-    app.innerHTML = template({ titles: titles, titles_editpassword: titles_editpassword});
+    if(app) app.innerHTML = template({ titles: titles, titles_editpassword: titles_editpassword});
     pageStartup();
 });
   
