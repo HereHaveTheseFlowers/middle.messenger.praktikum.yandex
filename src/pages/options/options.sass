@@ -24,7 +24,8 @@
     border-radius: 50%
     width: 130px
     height: 130px
-    background: $color_light
+    background: url('./img/avatar.svg')
+    background-color: $color_light
     overflow: hidden
 
 .avatar__image
@@ -64,38 +65,6 @@
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
     padding: 23
     margin-top: 24px
-
-.options__row
-    position: relative
-    width: 100%
-    height: 33px
-    display: flex
-    align-items: center
-    border-top: 1px solid $color_light
-
-.options__row:first-child
-    border-top: 0px
-
-.options__attribute
-    color: $color_dark
-    font-style: normal
-    font-weight: 500
-    font-size: 13px
-
-input.options__attribute
-    border: none
-    background: none
-    font-family: 'Inter', sans
-    text-align: right
-
-input.options__attribute:active,
-input.options__attribute:focus,
-input.options__attribute:hover
-    outline: none
-
-.options__attribute__right
-    position: absolute
-    right: 0
 
 .options__button
     margin-top: 12px

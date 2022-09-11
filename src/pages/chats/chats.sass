@@ -1,0 +1,186 @@
+.chatlist
+    position: relative
+    width: 25vw
+    height: 100%
+    background: $color_light
+    border-right: 1px solid $color_normal
+    overflow: hidden
+    display: flex
+    flex-direction: column
+
+.chatlist__profilebutton
+    right: 0
+    position: absolute
+    margin-right: 10px
+    margin-top: 20px
+    display: inline
+    width: 50px
+    height: 12px
+    font-size: 12px
+
+.chatlist__search
+    display: block
+    margin-top: 56px
+    width: 90%
+    margin: 56px auto 14px auto
+    height: 32px
+    background: $color_normal
+    border-radius: 5px
+    text-align: center
+    border: 0
+    &::placeholder
+        color: $color_dark
+        opacity: 1
+        font-family: 'Inter'
+        font-style: normal
+        font-weight: 500
+        font-size: 12px
+        line-height: 12px
+        transition: 0.2s opacity
+    &:focus::placeholder
+        opacity: 0
+
+.chatlist__list
+    flex: 1
+    overflow-y: overlay
+    &:hover::-webkit-scrollbar
+        width: 5px
+        background: rgba(133, 133, 133, 0.2)
+    &::-webkit-scrollbar
+        border-radius: 10px
+        width: 0px
+        background: transparent
+    &::-webkit-scrollbar-thumb
+        border-radius: 10px
+        background: rgba($color_normal, 0.6)
+
+.selectedchat
+    width: 75vw
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    color: $color_dark
+    flex-direction: column
+
+.selectedchat__namebar
+    height: 54px
+    width: 95%
+    border-bottom: 1px solid $color_normal
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.selectedchat__name
+    flex: 1
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 600
+    font-size: 13px
+
+.selectedchat__avatar
+    margin: 0 10px
+    height: 34px
+    width: 34px
+    border-radius: 50%
+    background: $color_normal
+
+.selectedchat__optionsbutton
+    width: 25px
+    height: 25px
+    background: url("./img/options.svg") no-repeat center
+
+.selectedchat__body
+    width: 95%
+    flex: 1
+
+.selectedchat__messagefield
+    position: relative
+    height: 54px
+    width: 95%
+    border-top: 1px solid $color_normal
+    display: flex
+    align-items: center
+
+.selectedchat__attachment
+    background: url("./img/attachment.svg") no-repeat
+    width: 32px
+    height: 32px
+
+.attachmentmenu
+    position: absolute
+    width: 162px
+    height: 128px
+    left: 0
+    top: -265%
+    background: $color_normal
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
+    border-radius: 12px
+    display: none
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+
+.attachmentmenu__button
+    display: flex
+    align-items: center
+    width: 130px
+    padding: 0
+    height: 33%
+    background: transparent
+    border: 0
+    cursor: pointer
+
+.attachmentmenu__image
+    width: 22px
+    height: 22px
+    margin-right: 15px
+
+.attachmentmenu__image__media
+    background: url("./img/media.svg") no-repeat
+
+.attachmentmenu__image__file
+    background: url("./img/file.svg") no-repeat
+    
+.attachmentmenu__image__loc
+    background: url("./img/location.svg") no-repeat
+
+.attachmentmenu__text
+    flex: 1
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    color: $color_dark
+    text-align: left
+
+.selectedchat__message
+    flex: 1
+    margin: 0 10px
+    height: 32px
+    padding-left: 20px
+    background: $color_normal
+    border-radius: 30px
+    border: 0
+    &::placeholder
+        color: $color_dark
+        opacity: 1
+        font-family: 'Inter'
+        font-style: normal
+        font-weight: 500
+        font-size: 12px
+        transition: 0.2s opacity
+    &:focus::placeholder
+        opacity: 0
+
+.selectedchat__buttonsend
+    width: 28px
+    height: 28px
+    border: 0
+    cursor: pointer
+    background: transparent

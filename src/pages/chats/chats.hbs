@@ -1,0 +1,42 @@
+
+<div class="chatlist">
+    {{{buttonprofile}}}
+    <input type="search" class="chatlist__search" name="chatsearch" placeholder="Search">
+    <div class="chatlist__list">
+        {{#each chats}}
+            {{{this}}}
+        {{/each}} 
+    </div>
+</div>
+<div class="selectedchat">
+    {{#if selectedchat}}
+    <div class="selectedchat__namebar">
+        <div class="selectedchat__avatar"></div>
+        <div class="selectedchat__name">{{selectedchat.name}}</div>
+        {{{buttonoptions}}}
+    </div>
+    <div class="selectedchat__body">
+    </div>
+    <form class="selectedchat__messagefield">
+        {{{buttonattachment}}}
+        <div class="attachmentmenu">
+            <button type="button" class="attachmentmenu__button animate-click">
+                <div class="attachmentmenu__image attachmentmenu__image__media"></div><span class="attachmentmenu__text">Photo or Video</span>
+            </button>
+            <button type="button" class="attachmentmenu__button animate-click">
+                <div class="attachmentmenu__image attachmentmenu__image__file"></div><span class="attachmentmenu__text">File</span>
+            </button>
+            <button type="button" class="attachmentmenu__button animate-click">
+                <div class="attachmentmenu__image attachmentmenu__image__loc"></div><span class="attachmentmenu__text">Location</span>
+            </button>
+        </div>
+        <input type="text" class="selectedchat__message" name="message" placeholder="Message">
+        <button type="button" class="selectedchat__buttonsend animate-click">
+            {{{arrow}}}
+        </button>
+    </form>
+    {{else}}
+    Choose a chat to send messages
+    {{/if}}
+</div>
+

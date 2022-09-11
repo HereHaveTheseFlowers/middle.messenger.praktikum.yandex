@@ -1,105 +1,44 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="../../styles.sass" />
-    </head>
-    <body>
-        <main class="flexcontainer options">
-            <button class="button__goback animate-click">
-                {{>arrow flip="true"}}
-            </button>
-            <div class="avatar">
-                <img src="../../img/avatar.svg" alt="" class="avatar__image">
-                <button class="avatar__edit">Change<br>Avatar</button>
-            </div>
-            <div class="options__attribute__sizebig"></div>
-            <div class="options__container options__profile">
-                <div class="options__row">
-                    <span class="options__attribute options__attribute__left">Email</span>
-                    <span class="options__attribute options__attribute__right options__email"></span>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Login</div>
-                    <div class="options__attribute options__attribute__right options__login"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">First Name</div>
-                    <div class="options__attribute options__attribute__right options__firstname"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Last Name</div>
-                    <div class="options__attribute options__attribute__right options__lastname"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Displayed Name</div>
-                    <div class="options__attribute options__attribute__right"></div>
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Phone</div>
-                    <div class="options__attribute options__attribute__right"></div>
-                </div>
-                {{> button label="Edit info" shape_dir="left" added_class="options__button options__button__editinfo animate-click" }}
-                {{> button label="Change password" shape_dir="right" added_class="options__button options__button__changepassword animate-click" }}
-                {{> button label="Back to chats" shape_dir="left" added_class="options__button options__button__backtochats animate-click" }}
-            </div>
+<button class="button__goback animate-click">
+    {{{arrow}}}
+</button>
+<div class="avatar">
+    <img src="" alt="" class="avatar__image">
+    <button class="avatar__edit">Change<br>Avatar</button>
+</div>
+<div class="options__attribute__sizebig"></div>
+<div class="options__container options__profile">
+    {{#each  titles }} 
+        {{{this}}}
+    {{/each  }} 
+    {{{buttoneditinfo}}}
+    {{{buttonchangepassword}}}
+    {{{buttonbacktochats}}}
+</div>
 
-            <form class="options__container options__editinfo">
-                <div class="options__row">
-                    <span class="options__attribute options__attribute__left">Email</span>
-                    <input name="email" type="text" class="options__attribute options__attribute__right options__email">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Login</div>
-                    <input name="login" type="text" class="options__attribute options__attribute__right options__login">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">First Name</div>
-                    <input name="first_name" type="text" class="options__attribute options__attribute__right options__firstname">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Last Name</div>
-                    <input name="second_name" type="text" class="options__attribute options__attribute__right options__lastname">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Displayed Name</div>
-                    <input name="display_name" type="text" class="options__attribute options__attribute__right">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">Phone</div>
-                    <input name="phone" type="text" class="options__attribute options__attribute__right">
-                </div>
-                <div style="display: flex; justify-content: center">
-                    {{> button label="Save" added_class="options__button options__button__saveinfo animate-click" }}
-                </div>
-            </form>
+<form class="options__container options__editinfo">
+    {{#each  titles__editinfo}} 
+        {{{this}}}
+    {{/each  }} 
+    <div style="display: flex; justify-content: center">
+        {{{ buttonsaveinfo }}}
+    </div>
+</form>
 
-            <form class="options__container options__editpassword">
-                <div class="options__row">
-                    <span class="options__attribute options__attribute__left">Old password</span>
-                    <input type="password" name="oldPassword" placeholder="•••••••••"  class="options__attribute options__attribute__right options__email">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">New password</div>
-                    <input type="password" name="newPassword" placeholder="•••••••••••" class="options__attribute options__attribute__right options__login">
-                </div>
-                <div class="options__row">
-                    <div class="options__attribute options__attribute__left">New password (again)</div>
-                    <input type="password" name="newPassword" placeholder="•••••••••••" class="options__attribute options__attribute__right options__firstname">
-                </div>
-                <div style="display: flex; justify-content: center">
-                    {{> button label="Save" added_class="options__button options__button__savepassword animate-click" }}
-                </div>
-            </form>
+<form class="options__container options__editpassword">
+    {{#each  titles_editpassword}} 
+        {{{this}}}
+    {{/each  }}
+    <div style="display: flex; justify-content: center">
+        {{{buttonsavepassword}}}
+    </div>
+</form>
 
-            <div class="avatarupload">
-                <div class="avatarupload__background"></div>
-                <form class="avatarupload__form">
-                    <span class="avatarupload__title">Upload a file</span>
-                    <label for="fileupload" class="avatarupload__label">Choose a file on your computer</label>
-                    <input type="file" id="fileupload" name="avatar" class="avatarupload__input" multiple>
-                    {{> button label="Submit" added_class="animate-click" }}
-                </form>
-            </div>
-        </main>
-        <script src="./options.js" type="module"></script>
-    </body>
-</html> 
+<div class="avatarupload">
+    <div class="avatarupload__background"></div>
+    <form class="avatarupload__form">
+        <span class="avatarupload__title">Upload a file</span>
+        <label for="fileupload" class="avatarupload__label">Choose a file on your computer</label>
+        <input type="file" id="fileupload" name="avatar" class="avatarupload__input" multiple>
+        {{buttonavatarupload}}
+    </form>
+</div>
