@@ -1,0 +1,15 @@
+<div class="chat">
+    <div class="chat__container">
+        <div class="chat__avatar"></div>
+        <div class="chat__content">
+            <span class="chat__name">{{ name }}</span>
+            <span class="chat__lastmessage">{{ lastmessage }}</span>
+        </div>
+        <div class="chat__notification">
+            <span class="chat__lastmessagedate">{{ lastmessagedate }}</span>
+            {{#if newmessages}}
+            <div class="chat__newmessage">{{newmessages}}</div>
+            {{/if}}
+        </div>
+    </div>
+</div>

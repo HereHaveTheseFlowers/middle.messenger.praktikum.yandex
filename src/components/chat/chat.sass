@@ -1,0 +1,80 @@
+.chat
+    position: relative
+    height: 70px
+    border-top: 1px solid $color_normal
+    width: 90%
+    margin: 0 auto
+    display: flex
+    justify-content: center
+    align-items: center
+
+.chat__container
+    position: absolute
+    width: 110%
+    height: 66px
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.chat__newmessage
+    margin-top: 14px
+    width: 20px
+    height: 20px
+    background: $color_dark
+    border-radius: 50%
+    color: $color_light
+    text-align: center
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 11px
+    display: flex
+    justify-content: center
+    align-items: center
+
+.chat__avatar
+    margin: 0 10px
+    height: 50px
+    width: 50px
+    border-radius: 50%
+    background: $color_normal
+
+.chat__content
+    height: 50px
+    flex: 1
+    display: flex
+    flex-direction: column
+
+.chat__name
+    color: $color_dark
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 600
+    font-size: 13px
+
+.chat__lastmessage
+    margin-top: 4px
+    color: #999999
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+
+.chat__lastmessagedate
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 9px
+    text-align: right
+    color: #999999
+
+.chat__notification
+    margin: 0 10px
+    height: 50px
+    width: 25px
+
+.chat__active
+    .chat__container
+        background: $color_normal
+        .chat__avatar
+            background: $color_light
