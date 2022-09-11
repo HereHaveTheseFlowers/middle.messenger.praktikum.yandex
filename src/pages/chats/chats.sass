@@ -5,9 +5,12 @@
     background: $color_light
     border-right: 1px solid $color_normal
     overflow: hidden
+    display: flex
+    flex-direction: column
 
 .chatlist__profilebutton
-    float: right
+    right: 0
+    position: absolute
     margin-right: 10px
     margin-top: 20px
     display: inline
@@ -38,7 +41,18 @@
         opacity: 0
 
 .chatlist__list
-    width: 100%
+    flex: 1
+    overflow-y: overlay
+    &:hover::-webkit-scrollbar
+        width: 5px
+        background: rgba(133, 133, 133, 0.2)
+    &::-webkit-scrollbar
+        border-radius: 10px
+        width: 0px
+        background: transparent
+    &::-webkit-scrollbar-thumb
+        border-radius: 10px
+        background: rgba($color_normal, 0.6)
 
 .selectedchat
     width: 75vw

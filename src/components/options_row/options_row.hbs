@@ -1,8 +1,6 @@
-<div class="options__row">
-    <span class="options__attribute options__attribute__left">{{attr_first}}</span>
-    {{#if input}}
-    <input name="{{input_name}}" type="{{input_type}}" {{#if input_placeholder}}placeholder="{{input_placeholder}}" {{/if}}class="options__attribute options__attribute__right">
-    {{else}}
-    <span class="options__attribute options__attribute__right"></span>
-    {{/if}}
-</div>
+<span class="options__attribute options__attribute__left">{{attr_first}}</span>
+{{#if input}}
+<input name="{{name}}" type="{{type}}" {{#if placeholder}}placeholder="{{placeholder}}" {{/if}}class="options__attribute options__attribute__right">
+{{else}}
+<span class="options__attribute options__attribute__right"></span>
+{{/if}}

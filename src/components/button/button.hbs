@@ -1,7 +1,5 @@
-<button class="button {{ added_class }} {{#if bgshape}}{{else}}button__bg{{/if}}" {{#if type}}type="{{type}}"{{/if}} >
-    {{ label }}
-    {{#if bgshape}}
-    {{else}}
-    <div class="button__shape button__shape__{{#if shape_dir}}{{shape_dir}}{{else}}right{{/if}}"></div>
-    {{/if}}
-</button>
+{{ label }}
+{{#if bgshape}}
+<div class="button__shape button__shape__{{#if shape_dir}}{{shape_dir}}{{else}}right{{/if}}"></div>
+{{else}}
+{{/if}}

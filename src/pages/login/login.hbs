@@ -1,23 +1,20 @@
-<div class="flexcontainer">
-    <div class="mainlogo flexcontainer__dualcontainer">
-        {{>mainlogo }}
-    </div>
+<div class="mainlogo flexcontainer__dualcontainer">
+    {{{mainlogo}}}
+</div>
+<div class="login flexcontainer__dualcontainer">
+    <h2 class="login__description">Chat that feels warm and comfy</h2>
 
-    <div class="login flexcontainer__dualcontainer">
-        <h2 class="login__description">Chat that feels warm and comfy</h2>
-
-        <div class="login__circle">
-            <svg class="login__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 227.8 195.6">
-                <use xlink:href="#logo-svg"/>
-            </svg>
-            <form class="login__form">
-                <h2 class="login__formname">Log In to Vacate</h2>
-                {{#each auth}}
-                    {{>auth_row name=this.name type=this.type placeholder=this.placeholder}}
-                {{/each}}
-                {{>button label="Sign In" added_class="login__submit animate-click"}}
-                {{>button label="Create account" added_class="login__createaccount animate-click" shape_dir="none"}}
-            </form>
-        </div>
+    <div class="login__circle">
+        <svg class="login__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 227.8 195.6">
+            <use xlink:href="#logo-svg"/>
+        </svg>
+        <form class="login__form">
+            <h2 class="login__formname">Log In to Vacate</h2>
+            {{#each authrows}}
+                {{{this}}}
+            {{/each}}
+            {{{buttonlogin}}}
+            {{{buttonregister}}}
+        </form>
     </div>
 </div>

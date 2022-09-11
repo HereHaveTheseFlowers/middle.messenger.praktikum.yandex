@@ -1,30 +1,32 @@
-import animateClick  from '../../utils/animateClick';
 import template from './login.hbs';
-import '../../components/button';
-import '../../components/mainlogo';
-import '../../components/auth_row';
+import Block from '../../utils/Block';
+import Mainlogo from '../../components/mainlogo/index.ts';
+import { AuthRow, AuthProps } from '../../components/auth_row/index.ts';
+import { Button } from '../../components/button';
 
 type Nullable<T> = T | null;
 
-let data: Array<object> = [ { title: "Login",          name: "login",          type: "text",        placeholder: "Login"}, 
-                            { title: "Password",       name: "password",       type: "password",    placeholder: "Password"}]
+export let authrows: Array<any> = [ {div_class: "", name: "login", type: "text", placeholder: "Login"}, 
+                            {div_class: "", name: "password", type: "password", placeholder: "Password"} ]
 
-window.addEventListener('DOMContentLoaded', () => {
-  const app: Nullable<HTMLDivElement> = document.querySelector('#app');
 
-  if(app) app.innerHTML = template({ auth: data });
-
-  for(let el of document.querySelectorAll(".animate-click")) {
-      el.addEventListener("click", function() {
-          animateClick(el);
-      });
-  }
-  for(let el of document.querySelectorAll(".login__createaccount")) {
-      el.addEventListener("click", function() {
-          setTimeout(() =>  {
-              window.location.href='../../pages/registration/registration.html'
-          }, 400);
-      });
-  }
-});
+interface LoginPageProps {
+    mainlogo: Mainlogo;
+    authrows: Array<any>;
+    buttonlogin: Button;
+    buttonregister: Button;
+}
+    
+export class LoginPage extends Block<LoginPageProps> {
+    constructor(props: LoginPageProps) {
+        super('div', props);
+        this.element!.classList.add("flexcontainer")
+    }
+    init() {
+        this.childrenCollection.authrows = this.props.authrows.map((authrow: AuthProps) => new AuthRow(authrow))
+    }
+    render() {
+        return this.compile(template, { mainlogo: this.props.mainlogo, buttonlogin: this.props.buttonlogin, buttonregister: this.props.buttonregister });
+    }
+}
 

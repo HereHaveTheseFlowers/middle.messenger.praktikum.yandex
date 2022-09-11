@@ -1,32 +1,37 @@
-import animateClick  from '../../utils/animateClick';
 import template from './registration.hbs';
-import '../../components/button';
-import '../../components/mainlogo';
-import '../../components/auth_row';
+import Block from '../../utils/Block';
+import Mainlogo from '../../components/mainlogo/index.ts';
+import { AuthRow, AuthProps } from '../../components/auth_row/index.ts';
+import { Button } from '../../components/button/index.ts';
 
-const data = [  { title: "Email",          name: "email",          type: "text",       placeholder: "Email"}, 
-                { title: "Login",          name: "login",          type: "text",       placeholder: "Login"}, 
-                { title: "First Name",     name: "first_name",     type: "text",       placeholder: "First Name"}, 
-                { title: "Last Name",      name: "second_name",    type: "text",       placeholder: "Last Name"}, 
-                { title: "Phone",          name: "phone",          type: "text",       placeholder: "Phone"}, 
-                { title: "Password",       name: "password",       type: "password",   placeholder: "Password"},
-                { title: "Password (Again)",name: "password",       type: "password",   placeholder: "Password (Again)"}]
+type Nullable<T> = T | null;
 
-window.addEventListener('DOMContentLoaded', () => {
-  const app = document.querySelector('#app');
+export let authrows_registration: Array<any> = [ {div_class: "registration__field", name: "email", type: "text", placeholder: "Email"}, 
+                            {div_class: "registration__field", name: "login", type: "text", placeholder: "Login"}, 
+                            {div_class: "registration__field", name: "first_name", type: "text", placeholder: "First Name"}, 
+                            {div_class: "registration__field", name: "second_name", type: "text", placeholder: "Last Name"}, 
+                            {div_class: "registration__field", name: "phone", type: "text", placeholder: "Phone"}, 
+                            {div_class: "registration__field", name: "password", type: "password", placeholder: "Password"}, 
+                            {div_class: "registration__field", name: "password", type: "password", placeholder: "Password (Again)"}]
 
-  if(app) app.innerHTML = template({ auth: data });
-  for(let el of document.querySelectorAll(".animate-click")) {
-      el.addEventListener("click", function() {
-          animateClick(el);
-      });
-  }
-  for(let el of document.querySelectorAll(".registration__signin")) {
-      el.addEventListener("click", function() {
-          setTimeout(() =>  {
-              window.location.href='../../pages/login/login.html'
-          }, 400);
-      });
-  }
-  
-});
+
+interface RegistrationPageProps {
+    mainlogo: Mainlogo;
+    authrows: Array<any>;
+    buttonlogin: Button;
+    buttonregister: Button;
+}
+    
+export class RegistrationPage extends Block<RegistrationPageProps> {
+    constructor(props: RegistrationPageProps) {
+        super('div', props);
+        this.element!.classList.add("flexcontainer")
+    }
+    init() {
+        this.childrenCollection.authrows = this.props.authrows.map((authrow: AuthProps) => new AuthRow(authrow))
+    }
+    render() {
+        return this.compile(template, { mainlogo: this.props.mainlogo, buttonlogin: this.props.buttonlogin, buttonregister: this.props.buttonregister });
+    }
+}
+
