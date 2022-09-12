@@ -15,21 +15,21 @@ interface ButtonProps {
 export class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
     super('button', props);
-    this.element!.classList.add("button")
+    if(this.element) this.element.classList.add("button")
     if(props.added_class) {
       if(Array.isArray(props.added_class)) {
-        for(let newclass of props.added_class) {
-          this.element!.classList.add(newclass)
+        for(const newclass of props.added_class) {
+          if(this.element) this.element.classList.add(newclass)
         }
       } else {
-        this.element!.classList.add(props.added_class)
+        if(this.element) this.element.classList.add(props.added_class)
       }
     }
     if(props.bgshape) {
-      this.element!.classList.add("button__bg")
+      if(this.element) this.element.classList.add("button__bg")
     }
     if(props.type) {
-      this.element!.type = props.type
+      if(this.element) this.element.type = props.type
     }
   }
 

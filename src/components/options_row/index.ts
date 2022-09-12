@@ -12,7 +12,7 @@ export interface OptionsRowProps {
 export class OptionsRow extends Block<OptionsRowProps> {
     constructor(props: OptionsRowProps) {
         super('div', props);
-        this.element!.classList.add("options__row")
+        if(this.element) this.element.classList.add("options__row")
     }
 
     render() {

@@ -11,7 +11,7 @@ export interface ChatProps {
 export class Chat extends Block<ChatProps> {
     constructor(props: ChatProps) {
         super('div', props);
-        this.element!.classList.add("chat")
+        if(this.element) this.element.classList.add("chat")
     }
 
     render() {

@@ -1,12 +1,10 @@
 import template from './registration.hbs';
 import Block from '../../utils/Block';
-import Mainlogo from '../../components/mainlogo/index.ts';
-import { AuthRow, AuthProps } from '../../components/auth_row/index.ts';
+import { Mainlogo } from '../../components/mainlogo';
+import { AuthRow, AuthProps } from '../../components/auth_row';
 import { Button } from '../../components/button/index.ts';
 
-type Nullable<T> = T | null;
-
-export let authrows_registration: Array<any> = [ {div_class: "registration__field", name: "email", type: "text", placeholder: "Email"}, 
+export const authrows_registration: Array<object> = [ {div_class: "registration__field", name: "email", type: "text", placeholder: "Email"}, 
                             {div_class: "registration__field", name: "login", type: "text", placeholder: "Login"}, 
                             {div_class: "registration__field", name: "first_name", type: "text", placeholder: "First Name"}, 
                             {div_class: "registration__field", name: "second_name", type: "text", placeholder: "Last Name"}, 
@@ -16,8 +14,7 @@ export let authrows_registration: Array<any> = [ {div_class: "registration__fiel
 
 
 interface RegistrationPageProps {
-    mainlogo: Mainlogo;
-    authrows: Array<any>;
+    authrows: Array<object>;
     buttonlogin: Button;
     buttonregister: Button;
 }
@@ -25,13 +22,15 @@ interface RegistrationPageProps {
 export class RegistrationPage extends Block<RegistrationPageProps> {
     constructor(props: RegistrationPageProps) {
         super('div', props);
-        this.element!.classList.add("flexcontainer")
+        if(this.element) this.element.classList.add("flexcontainer")
     }
     init() {
+        this.children.mainlogo = new Mainlogo();
         this.childrenCollection.authrows = this.props.authrows.map((authrow: AuthProps) => new AuthRow(authrow))
+        this.props.authrows = [];
     }
     render() {
-        return this.compile(template, { mainlogo: this.props.mainlogo, buttonlogin: this.props.buttonlogin, buttonregister: this.props.buttonregister });
+        return this.compile(template, this.props);
     }
 }
 

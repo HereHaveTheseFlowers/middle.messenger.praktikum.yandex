@@ -1,18 +1,15 @@
 import template from './login.hbs';
 import Block from '../../utils/Block';
-import Mainlogo from '../../components/mainlogo/index.ts';
-import { AuthRow, AuthProps } from '../../components/auth_row/index.ts';
+import { Mainlogo } from '../../components/mainlogo';
+import { AuthRow, AuthProps } from '../../components/auth_row';
 import { Button } from '../../components/button';
 
-type Nullable<T> = T | null;
-
-export let authrows: Array<any> = [ {div_class: "", name: "login", type: "text", placeholder: "Login"}, 
+export const authrows: Array<object> = [ {div_class: "", name: "login", type: "text", placeholder: "Login"}, 
                             {div_class: "", name: "password", type: "password", placeholder: "Password"} ]
 
 
 interface LoginPageProps {
-    mainlogo: Mainlogo;
-    authrows: Array<any>;
+    authrows: Array<object>;
     buttonlogin: Button;
     buttonregister: Button;
 }
@@ -20,13 +17,15 @@ interface LoginPageProps {
 export class LoginPage extends Block<LoginPageProps> {
     constructor(props: LoginPageProps) {
         super('div', props);
-        this.element!.classList.add("flexcontainer")
+        if(this.element) this.element.classList.add("flexcontainer")
     }
     init() {
+        this.children.mainlogo = new Mainlogo({});
         this.childrenCollection.authrows = this.props.authrows.map((authrow: AuthProps) => new AuthRow(authrow))
+        this.props.authrows = [];
     }
     render() {
-        return this.compile(template, { mainlogo: this.props.mainlogo, buttonlogin: this.props.buttonlogin, buttonregister: this.props.buttonregister });
+        return this.compile(template, this.props );
     }
 }
 

@@ -8,7 +8,7 @@ export interface ArrowProps {
 export class Arrow extends Block<ArrowProps> {
     constructor(props: ArrowProps) {
         super('div', props);
-        this.element!.classList.add("arrow")
+        if(this.element) this.element.classList.add("arrow")
     }
 
     render() {

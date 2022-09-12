@@ -87,13 +87,13 @@ class Block<P extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  protected init() {}
+  protected init() { /* This gets rewritten by things that extend Block  */ }
 
   _componentDidMount() {
     this.componentDidMount();
   }
 
-  componentDidMount() {}
+  componentDidMount() { /* This gets rewritten by things that extend Block */ }
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -126,7 +126,7 @@ class Block<P extends Record<string, any> = any> {
   private _render() {
     const fragment = this.render();
 
-    this._element!.innerHTML = '';
+    this._element?.innerHTML = '';
 
     this._element!.append(fragment);
 
@@ -140,8 +140,8 @@ class Block<P extends Record<string, any> = any> {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
       });
     }
-    for(let childrencollection in this.childrenCollection) {
-      for(let newchild of this.childrenCollection[childrencollection]) {
+    for(const childrencollection in this.childrenCollection) {
+      for(const newchild of this.childrenCollection[childrencollection]) {
         if(!contextAndStubs[childrencollection]) contextAndStubs[childrencollection] = [];
         contextAndStubs[childrencollection].push(`<div data-id="${newchild.id}"></div>`);
       }
@@ -162,8 +162,8 @@ class Block<P extends Record<string, any> = any> {
       stub.replaceWith(component.getContent()!);
     });
     
-    for(let childrencollection in this.childrenCollection) {
-      for(let newchild of this.childrenCollection[childrencollection]) {
+    for(const childrencollection in this.childrenCollection) {
+      for(const newchild of this.childrenCollection[childrencollection]) {
         const stub = temp.content.querySelector(`[data-id="${newchild.id}"]`);
         if (!stub) {
           return;

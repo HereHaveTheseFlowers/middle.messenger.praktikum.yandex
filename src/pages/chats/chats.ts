@@ -4,10 +4,10 @@ import { Chat, ChatProps } from '../../components/chat';
 import { Button } from '../../components/button';
 import { Arrow } from '../../components/arrow';
             
-export let selectedchat: { name: string, messages: Array<object> } = { name: "Vadim", messages: [{ message: "Hello", date: "11:56", authorid: "1234" },
+export const selectedchat: { name: string, messages: Array<object> } = { name: "Vadim", messages: [{ message: "Hello", date: "11:56", authorid: "1234" },
 { message: "Hi!", date: "11:56", authorid: "12345" }]};
 
-export let chats: Array<any> = [  { name: "Andrey",     lastmessage: "Image",   lastmessagedate: "10:49", newmessages: "2" }, 
+export const chats: Array<object> = [  { name: "Andrey",     lastmessage: "Image",   lastmessagedate: "10:49", newmessages: "2" }, 
                             { name: "Movieclub",  lastmessage: "Hi!",     lastmessagedate: "12:00", newmessages: ""}, 
                             { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "10:49", newmessages: "4"}, 
                             { name: "Vadim",      lastmessage: "Hows it goint?", lastmessagedate: "10:49", newmessages: ""}, 
@@ -22,7 +22,7 @@ export let chats: Array<any> = [  { name: "Andrey",     lastmessage: "Image",   
                             { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "Apr 13 2020", newmessages: ""}]
 
 interface ChatsPageProps {
-  chats: Array<any>;
+  chats: Array<object>;
   buttonprofile: Button;
   arrow: Arrow;
   buttonattachment: Button;
@@ -33,7 +33,7 @@ interface ChatsPageProps {
 export class ChatsPage extends Block<ChatsPageProps> {
     constructor(props: ChatsPageProps) {
         super('div', props);
-        this.element!.classList.add("flexcontainer")
+        if(this.element) this.element.classList.add("flexcontainer")
     }
     init() {
         this.childrenCollection.chats = this.props.chats.map((selchat: ChatProps) => new Chat(selchat))

@@ -11,7 +11,7 @@ export interface ErrorProps {
 export class ErrorPage extends Block<ErrorProps> {
     constructor(props: ErrorProps) {
         super('div', props);
-        this.element!.classList.add("error__container")
+        if(this.element) this.element.classList.add("error__container")
     }
     render() {
         return this.compile(template, this.props);

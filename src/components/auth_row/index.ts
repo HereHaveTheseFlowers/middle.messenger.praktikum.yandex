@@ -11,9 +11,9 @@ export interface AuthProps {
 export class AuthRow extends Block<AuthProps> {
     constructor(props: AuthProps) {
         super('div', props);
-        this.element!.classList.add("auth__field")
+        if(this.element)  this.element.classList.add("auth__field")
         if(props.div_class) {
-            this.element!.classList.add(props.div_class)
+            if(this.element) this.element.classList.add(props.div_class)
         }
     }
 
