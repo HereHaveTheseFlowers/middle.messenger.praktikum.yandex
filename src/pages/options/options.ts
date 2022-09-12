@@ -4,6 +4,15 @@ import { OptionsRow, OptionsRowProps } from '../../components/options_row';
 import { Button } from '../../components/button';
 import { Arrow } from '../../components/arrow';
 
+export const userdata: { [index: string]: string; } = {
+    email: 'pochta@yandex.ru',
+    login: 'ivanivanov',
+    firstname: 'Ivan',
+    secondname: 'Ivanov',
+    displayedname: 'Ivan',
+    phone: '+7 (909) 967 30 30',
+}
+
 export const titles_editpassword: Array<object>  = [    { input: "true", attr_first: "Old password",         name: "oldPassword", type: "password", placeholder: "•••••••••"    }, 
                                                         { input: "true", attr_first: "New Password",         name: "newPassword", type: "password", placeholder: "•••••••••••"  }, 
                                                         { input: "true", attr_first: "New Password (Again)", name: "newPassword", type: "password", placeholder: "•••••••••••"  }]
@@ -44,9 +53,9 @@ export class OptionsPage extends Block<OptionsPageProps> {
         this.childrenCollection.titles = this.props.titles.map((title: OptionsRowProps) => new OptionsRow(title))
         this.props.titles = [];
         this.childrenCollection.titles__editinfo = this.props.titles__editinfo.map((title: OptionsRowProps) => new OptionsRow(title))
-        this.props.titles = [];
+        this.props.titles__editinfo = [];
         this.childrenCollection.titles_editpassword = this.props.titles_editpassword.map((title: OptionsRowProps) => new OptionsRow(title))
-        this.props.titles = [];
+        this.props.titles_editpassword = [];
     }
     render() {
         return this.compile(template, this.props);
