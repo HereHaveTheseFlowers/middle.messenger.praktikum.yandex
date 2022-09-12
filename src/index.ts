@@ -1,7 +1,7 @@
 import { LoginPage, authrows } from './pages/login/login';
 import { RegistrationPage, authrows_registration } from './pages/registration/registration';
 import { ChatsPage, chats, selectedchat } from './pages/chats/chats';
-import { OptionsPage, titles_editpassword, titles__editinfo, titles } from './pages/options/options';
+import { OptionsPage, titles_editpassword, titles__editinfo, titles, userdata } from './pages/options/options';
 import { ErrorPage } from './pages/error/error';
 import { TempPage } from './pages/temp/temp';
 import { Mainlogo } from './components/mainlogo/index.ts';
@@ -9,6 +9,7 @@ import { AuthRow } from './components/auth_row/index.ts';
 import { Button } from './components/button/index.ts';
 import { Arrow } from './components/arrow';
 import animateClick from './utils/animateClick';
+import hasClass from './utils/hasClass';
 
   //temporary simple router emplementation
 const simplerouter: Record<string, () => void> = {
@@ -151,6 +152,34 @@ const simplerouter: Record<string, () => void> = {
     const root = document.querySelector('#app')!;
     const arrow = new Arrow({ flip: "true"});
 
+    function updateProfileInfo() {
+      for(let elName of document.getElementsByClassName('options__attribute__sizebig')) {
+          elName.textContent = userdata.displayedname;
+      }
+      for(let el of document.getElementsByClassName('options__profile')) {
+          let i = 0;
+          for(let child of el.children) {
+              if(hasClass(child, 'options__row')) {
+                  if(!child.lastElementChild) return
+                  child.lastElementChild.textContent = Object.entries(userdata)[i][1];
+                  i++;
+              }
+          }
+      }
+      for(let el of document.getElementsByClassName('options__editinfo')) {
+          let i = 0;
+          for(let child of el.children) {
+              if(hasClass(child, 'options__row')) {
+                  if(!child.lastElementChild) return
+                  let inputv: HTMLInputElement = <HTMLInputElement>child.lastElementChild
+                  inputv.value = Object.entries(userdata)[i][1];
+                  i++;
+              }
+          }
+      }
+    }
+
+
     const buttonbacktochats = new Button({
       label: "Back to chats",
       added_class: ["options__button", "options__button__backtochats"],
@@ -175,6 +204,12 @@ const simplerouter: Record<string, () => void> = {
       events: {
         click: () => { 
           animateClick(buttonchangepassword.element);
+          setTimeout(() =>  {
+            for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
+              profile.style.display = 'none';
+            for(let editpassword of document.querySelectorAll<HTMLElement>('.options__editpassword'))
+              editpassword.style.display = 'block';
+            }, 400);
         }
       }
     });
@@ -187,6 +222,12 @@ const simplerouter: Record<string, () => void> = {
       events: {
         click: () => { 
           animateClick(buttoneditinfo.element);
+          setTimeout(() =>  {
+            for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
+              profile.style.display = 'none';
+            for(let profile of document.querySelectorAll<HTMLElement>('.options__editinfo'))
+              profile.style.display = 'block';
+          }, 400);
         }
       }
     });
@@ -199,15 +240,31 @@ const simplerouter: Record<string, () => void> = {
       events: {
         click: () => { 
           animateClick(buttonsaveinfo.element);
+          setTimeout(() =>  {
+            for(let editinfo of document.querySelectorAll<HTMLElement>('.options__editinfo'))
+                editinfo.style.display = 'none';
+            for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
+                profile.style.display = 'block';
+          }, 400);
         }
       }
     });
     const buttonavatarupload = new Button({
       label: "Submit",
       added_class: "",
+      type: "button",
       events: {
         click: () => { 
           animateClick(buttonavatarupload.element);
+          setTimeout(() =>  {
+            const avatarupload = document.querySelector(".avatarupload")
+            if(avatarupload) {
+              avatarupload.style.opacity = 0;
+              setTimeout(() =>  {
+                avatarupload.style.display = 'none';
+              }, 200);
+            }
+          }, 400);
         }
       }
     });
@@ -219,6 +276,12 @@ const simplerouter: Record<string, () => void> = {
       events: {
         click: () => { 
           animateClick(buttonsavepassword.element);
+          setTimeout(() =>  {
+            for(let editpassword of document.querySelectorAll<HTMLElement>('.options__editpassword'))
+                editpassword.style.display = 'none';
+            for(let profile of document.querySelectorAll<HTMLElement>('.options__profile'))
+                profile.style.display = 'block';
+          }, 400);
         }
       }
     });
@@ -237,6 +300,7 @@ const simplerouter: Record<string, () => void> = {
     root.innerHTML = '';
     root.append(optionsPage.getContent()!);
     optionsPage.dispatchComponentDidMount();
+    updateProfileInfo();
     const button__goback = document.querySelector(".button__goback")
     if(button__goback) {
       button__goback.addEventListener("click", function() {
@@ -244,6 +308,30 @@ const simplerouter: Record<string, () => void> = {
         setTimeout(() =>  {
           simplerouter.temp()
         }, 400);
+      });
+    }
+    const avatar__edit = document.querySelector(".avatar__edit")
+    if(avatar__edit) {
+      avatar__edit.addEventListener("click", function() {
+        const avatarupload = document.querySelector(".avatarupload")
+        if(avatarupload) {
+          avatarupload.style.display = 'flex';
+          setTimeout(() =>  {
+            avatarupload.style.opacity = 1;
+          }, 1);
+        }
+      });
+    }
+    const avatarupload__background = document.querySelector(".avatarupload__background")
+    if(avatarupload__background) {
+      avatarupload__background.addEventListener("click", function() {
+        const avatarupload = document.querySelector(".avatarupload")
+        if(!avatarupload) return;
+        if(avatarupload.style.opacity != '1') return;
+        avatarupload.style.opacity = 0
+        setTimeout(() =>  {
+            avatarupload.style.display = 'none'
+        }, 200);
       });
     }
   },  
