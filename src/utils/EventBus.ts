@@ -3,13 +3,13 @@ type MapInterface<P> = P[keyof P]
 
 export class EventBus<
   E extends Record<string, string> = Record<string, string>,
-  Args extends Record<MapInterface<E>, Array<()=>void>> = Record<string, Array<()=>void>>
+  Args extends Record<MapInterface<E>, Array<Record<string, any>>> = Record<string, Array<Record<string, any>>>
 > {
   private readonly listeners: {
     [K in MapInterface<E>]?: Handler<Args[K]>[]
   } = {};
 
-  on<Event extends MapInterface<E>>(event: Event, callback: ()=> void) {
+  on<Event extends MapInterface<E>>(event: Event, callback: () =>void ) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
