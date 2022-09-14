@@ -3,13 +3,13 @@ type MapInterface<P> = P[keyof P]
 
 export class EventBus<
   E extends Record<string, string> = Record<string, string>,
-  Args extends Record<MapInterface<E>, any[]> = Record<string, any[]>
+  Args extends Record<MapInterface<E>, Array<Record<string, any>>> = Record<string, Array<Record<string, any>>>
 > {
   private readonly listeners: {
     [K in MapInterface<E>]?: Handler<Args[K]>[]
   } = {};
 
-  on<Event extends MapInterface<E>>(event: Event, callback: Handler<Args[Event]>) {
+  on<Event extends MapInterface<E>>(event: Event, callback: () =>void ) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -23,7 +23,7 @@ export class EventBus<
       throw new Error(`Нет события: ${event}`);
     }
 
-    this.listeners[event] = this.listeners[event]!.filter(
+    this.listeners[event] = this.listeners[event]?.filter(
       listener => listener !== callback
     );
   }
@@ -33,7 +33,7 @@ export class EventBus<
       throw new Event(`Нет события: ${event}`);
     }
 
-    this.listeners[event]!.forEach(listener => {
+    this.listeners[event]?.forEach(listener => {
       listener(...args);
     });
   }

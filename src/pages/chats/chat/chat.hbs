@@ -2,12 +2,12 @@
     <div class="chat__avatar"></div>
     <div class="chat__content">
         <span class="chat__name">{{ name }}</span>
-        <span class="chat__lastmessage">{{ lastmessage }}</span>
+        <span class="chat__lastmessage">{{ lastMessage }}</span>
     </div>
     <div class="chat__notification">
-        <span class="chat__lastmessagedate">{{ lastmessagedate }}</span>
-        {{#if newmessages}}
-        <div class="chat__newmessage">{{newmessages}}</div>
+        <span class="chat__lastmessagedate">{{ lastMessageDate }}</span>
+        {{#if newMessages}}
+        <div class="chat__newmessage">{{newMessages}}</div>
         {{/if}}
     </div>
 </div>

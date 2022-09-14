@@ -3,15 +3,15 @@ import Block from '../../utils/Block';
 import { Button } from '../../components/button';
 
 export interface ErrorProps {
-    error_number: string;
-    error_desc: string;
-    errorbutton: Button;
+    errorNumber: string;
+    errorDesc: string;
+    errorButton: Button;
 }
 
 export class ErrorPage extends Block<ErrorProps> {
     constructor(props: ErrorProps) {
         super('div', props);
-        this.element!.classList.add("error__container")
+        if(this.element) this.element.classList.add("error__container")
     }
     render() {
         return this.compile(template, this.props);

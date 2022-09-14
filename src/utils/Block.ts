@@ -13,25 +13,19 @@ class Block<P extends Record<string, any> = any> {
   public id = nanoid(6);
   protected props: P;
   public children: Record<string, Block>;
-  public childrenCollection: Array<any>;
+  public childrenCollection: Record<string, Array<Block>>;
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
   private _meta: { tagName: string; props: P; };
 
-  /** JSDoc
-   * @param {string} tagName
-   * @param {Object} props
-   *
-   * @returns {void}
-   */
-  constructor(tagName = "div", propsWithChildren: P) {
+  constructor(tagName = "div", propsWithChildren = {}) {
     const eventBus = new EventBus();
 
-    const { props, children } = this._getChildrenAndProps(propsWithChildren);
-    this.childrenCollection = [];
+    const { props, children } = this._getChildrenAndProps(propsWithChildren as P);
+    this.childrenCollection = {};
     this._meta = {
       tagName,
-      props: props as P
+      props: props
     };
 
     this.children = children;
@@ -50,7 +44,7 @@ class Block<P extends Record<string, any> = any> {
     if(childrenAndProps) {
       Object.entries(childrenAndProps).forEach(([key, value]) => {
         if (value instanceof Block) {
-          children[key as string] = value;
+          children[key] = value;
         } else {
           props[key] = value;
         }
@@ -87,13 +81,13 @@ class Block<P extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  protected init() {}
+  protected init() { /* This gets rewritten by things that extend Block  */ }
 
   _componentDidMount() {
     this.componentDidMount();
   }
 
-  componentDidMount() {}
+  componentDidMount() { /* This gets rewritten by things that extend Block */ }
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -101,13 +95,13 @@ class Block<P extends Record<string, any> = any> {
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate(oldProps: P, newProps: P) {
-    if (this.componentDidUpdate(oldProps, newProps)) {
+  private _componentDidUpdate() {
+    if (this.componentDidUpdate()) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  protected componentDidUpdate(oldProps: P, newProps: P) {
+  protected componentDidUpdate() {
     return true;
   }
 
@@ -127,21 +121,21 @@ class Block<P extends Record<string, any> = any> {
     const fragment = this.render();
 
     this._element!.innerHTML = '';
-
-    this._element!.append(fragment);
-
+    if(fragment) {
+      this._element!.append(fragment);
+    }
     this._addEvents();
   }
 
-  protected compile(template: (context: any) => string, context: any) {
+  protected compile(template: (context: Record<string, any>) => string, context: Record<string, any>) {
     const contextAndStubs = { ...context };
     if(contextAndStubs) {
       Object.entries(this.children).forEach(([name, component]) => {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
       });
     }
-    for(let childrencollection in this.childrenCollection) {
-      for(let newchild of this.childrenCollection[childrencollection]) {
+    for(const childrencollection in this.childrenCollection) {
+      for(const newchild of this.childrenCollection[childrencollection]) {
         if(!contextAndStubs[childrencollection]) contextAndStubs[childrencollection] = [];
         contextAndStubs[childrencollection].push(`<div data-id="${newchild.id}"></div>`);
       }
@@ -162,8 +156,8 @@ class Block<P extends Record<string, any> = any> {
       stub.replaceWith(component.getContent()!);
     });
     
-    for(let childrencollection in this.childrenCollection) {
-      for(let newchild of this.childrenCollection[childrencollection]) {
+    for(const childrencollection in this.childrenCollection) {
+      for(const newchild of this.childrenCollection[childrencollection]) {
         const stub = temp.content.querySelector(`[data-id="${newchild.id}"]`);
         if (!stub) {
           return;
@@ -175,8 +169,8 @@ class Block<P extends Record<string, any> = any> {
     return temp.content;
   }
 
-  protected render(): DocumentFragment | undefined {
-    return new DocumentFragment();
+  protected render(): string | Node | undefined {
+    return new DocumentFragment() as string | Node | undefined;
   }
 
   getContent() {
