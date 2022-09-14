@@ -2,7 +2,7 @@ import template from './arrow.hbs';
 import Block from '../../utils/Block';
 
 export interface ArrowProps {
-    flip?: string;
+    flip?: boolean;
 }
 
 export class Arrow extends Block<ArrowProps> {

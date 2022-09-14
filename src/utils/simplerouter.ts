@@ -1,84 +1,39 @@
-import { LoginPage, authrows } from '../pages/login/login';
-import { RegistrationPage, authrows_registration } from '../pages/registration/registration';
-import { ChatsPage, chats, selectedchat } from '../pages/chats/chats';
-import { OptionsPage, titles_editpassword, titles__editinfo, titles, userdata } from '../pages/options/options';
+import { LoginPage } from '../pages/login/login';
+import { RegistrationPage } from '../pages/registration/registration';
+import { ChatsPage } from '../pages/chats/chats';
+import { OptionsPage, updateProfileInfo } from '../pages/options/options';
 import { ErrorPage } from '../pages/error/error';
 import { TempPage } from '../pages/temp/temp';
+
 import { Button } from '../components/button';
-import { Arrow } from '../components/arrow';
-import animateClick from '../utils/animateClick';
-import hasClass from '../utils/hasClass';
+import animateClick from './animateClick';
 
 //temporary simple router emplementation
-export const simplerouter: Record<string, () => void> = {
+export const simpleRouter: Record<string, () => void> = {
   login: function() { 
     const root = document.querySelector('#app');
     if(!root) return;
-    const buttonlogin = new Button({
-      label: "Sign In",
-      added_class: "login__submit",
-      type: "button",
-      bgshape: true,
-      events: {
-        click: () => { 
-          animateClick(buttonlogin.element);
-        }
-      }
-    });
-    const buttonregister = new Button({
-      label: "Create account",
-      added_class: "login__createaccount",
-      type: "button",
-      events: {
-        click: () => { 
-          animateClick(buttonregister.element);
-          setTimeout(() =>  {
-            simplerouter.registration()
-          }, 400);
-        }
-      }
-    });
-    const loginPage = new LoginPage({ 
-      authrows: authrows, 
-      buttonlogin: buttonlogin,
-      buttonregister: buttonregister
-    });
+  
+    const loginPage = new LoginPage();
     root.innerHTML = '';
     root.append(loginPage.getContent()!);
     loginPage.dispatchComponentDidMount();
+  
+    document.querySelector('.login__form')!.addEventListener('submit', (e) => {
+      const formData = new FormData(e.target as HTMLFormElement);
+      e.preventDefault()
+      const output: Record<string, string> = {} 
+      for(const data of formData) {
+        output[data[0].toString()] = data[1].toString()
+      }
+      console.log(output);
+    });
   },  
   registration: function() { 
     const root = document.querySelector('#app');
     if(!root) return;
-    const buttonlogin = new Button({
-      label: "Sign In",
-      added_class: "registration__signin",
-      type: "button",
-      events: {
-        click: () => {
-          animateClick(buttonlogin.element);
-          setTimeout(() =>  {
-            simplerouter.login()
-          }, 400);
-        }
-      }
-    });
-    const buttonregister = new Button({
-      label: "Create account",
-      added_class: "registration__submit",
-      type: "button",
-      bgshape: true,
-      events: {
-        click: () => { 
-          animateClick(buttonregister.element);
-        }
-      }
-    });
-    const registrationPage = new RegistrationPage({ 
-      authrows: authrows_registration, 
-      buttonlogin: buttonlogin,
-      buttonregister: buttonregister
-    });
+    
+    const registrationPage = new RegistrationPage();
     root.innerHTML = '';
     root.append(registrationPage.getContent()!);
     registrationPage.dispatchComponentDidMount();
@@ -86,110 +41,28 @@ export const simplerouter: Record<string, () => void> = {
   chats: function() { 
     const root = document.querySelector('#app');
     if(!root) return;
-    const buttonprofile = new Button({
-      label: "Profile >",
-      added_class: "chatlist__profilebutton",
-      type: "button",
-      events: {
-        click: () => { 
-          animateClick(buttonprofile.element);
-          setTimeout(() =>  {
-            simplerouter.temp()
-          }, 400);
-        }
-      }
-    });
-    const buttonoptions = new Button({
-      label: "",
-      added_class: "selectedchat__optionsbutton",
-      type: "button",
-      events: {
-        click: () => { 
-          animateClick(buttonoptions.element);
-        }
-      }
-    });
-    const buttonattachment = new Button({
-      label: "",
-      added_class: "selectedchat__attachment",
-      type: "button",
-      events: {
-        click: () => { 
-          animateClick(buttonattachment.element);
-          const selectedchat__attachment = document.querySelector(".selectedchat__attachment")
-          if(selectedchat__attachment) {
-            selectedchat__attachment.addEventListener("click", function() {
-              const attachmentmenu: HTMLElement | null = document.querySelector(".attachmentmenu")
-              if(attachmentmenu) {
-                if(!attachmentmenu.style.display)
-                  attachmentmenu.style.display = "flex"
-                else
-                  attachmentmenu.style.display = ""
-              }
-            });
-          }
-        }
-      }
-    });
-    const arrow = new Arrow({});
-    const chatsPage = new ChatsPage({ 
-      chats: chats, 
-      buttonprofile: buttonprofile,
-      arrow: arrow,
-      buttonattachment: buttonattachment,
-      selectedchat: selectedchat,
-      buttonoptions: buttonoptions
-    });
+
+    const chatsPage = new ChatsPage();
     root.innerHTML = '';
     root.append(chatsPage.getContent()!);
     chatsPage.dispatchComponentDidMount();
-
   },  
   options: function() { 
     const root = document.querySelector('#app');
     if(!root) return;
 
-    function updateProfileInfo() {
-      for(const elName of document.getElementsByClassName('options__attribute__sizebig')) {
-          elName.textContent = userdata.displayedname;
-      }
-      for(const el of document.getElementsByClassName('options__profile')) {
-        let i = 0;
-        for(const child of el.children) {
-          if(hasClass(child, 'options__row')) {
-            if(!child.lastElementChild) return
-            child.lastElementChild.textContent = Object.entries(userdata)[i][1];
-            i++;
-          }
-        }
-      }
-      for(const el of document.getElementsByClassName('options__editinfo')) {
-        let i = 0;
-        for(const child of el.children) {
-          if(hasClass(child, 'options__row')) {
-            if(!child.lastElementChild) return
-            const inputv: HTMLInputElement = <HTMLInputElement>child.lastElementChild
-            inputv.value = Object.entries(userdata)[i][1];
-            i++;
-          }
-        }
-      }
-    }
-    const optionsPage = new OptionsPage({ 
-      titles: titles, 
-      titles__editinfo: titles__editinfo,
-      titles_editpassword: titles_editpassword
-    });
+    const optionsPage = new OptionsPage();
     root.innerHTML = '';
     root.append(optionsPage.getContent()!);
     optionsPage.dispatchComponentDidMount();
+  
     updateProfileInfo();
     const button__goback: HTMLElement | null = document.querySelector(".button__goback")
     if(button__goback) {
       button__goback.addEventListener("click", function() {
         animateClick(button__goback);
         setTimeout(() =>  {
-            simplerouter.temp()
+            simpleRouter.temp()
         }, 400);
       });
     }
@@ -223,22 +96,22 @@ export const simplerouter: Record<string, () => void> = {
     if(!root) return;
     const errorbutton = new Button({
       label: "Back to chats",
-      added_class: "error__button",
+      addedClassList: ["error__button"],
       type: "button",
       bgshape: true,
       events: {
         click: () => {
           animateClick(errorbutton.element);
           setTimeout(() =>  {
-            simplerouter.temp()
+            simpleRouter.temp()
           }, 400);
         }
       }
     });
     const error404Page = new ErrorPage({ 
-      error_number: "404",
-      error_desc: "Wrong page",
-      errorbutton: errorbutton
+      errorNumber: "404",
+      errorDesc: "Wrong page",
+      errorButton: errorbutton
     });
     root.innerHTML = '';
     root.append(error404Page.getContent()!);
@@ -250,22 +123,22 @@ export const simplerouter: Record<string, () => void> = {
     if(!root) return;
     const errorbutton = new Button({
       label: "Back to chats",
-      added_class: "error__button",
+      addedClassList: ["error__button"],
       type: "button",
       bgshape: true,
       events: {
         click: () => {
           animateClick(errorbutton.element);
           setTimeout(() =>  {
-            simplerouter.temp()
+            simpleRouter.temp()
           }, 400);
         }
       }
     });
     const error500Page = new ErrorPage({ 
-      error_number: "500",
-      error_desc: "Working on it",
-      errorbutton: errorbutton
+      errorNumber: "500",
+      errorDesc: "Working on it",
+      errorButton: errorbutton
     });
     root.innerHTML = '';
     root.append(error500Page.getContent()!);
@@ -282,22 +155,22 @@ export const simplerouter: Record<string, () => void> = {
       el.addEventListener("click", function() {
         switch(el.innerHTML) {
           case "Login":
-            simplerouter.login()
+            simpleRouter.login()
             break;
           case "Registration":
-            simplerouter.registration()
+            simpleRouter.registration()
             break;
           case "Chats":
-            simplerouter.chats()
+            simpleRouter.chats()
             break;
           case "Options":
-            simplerouter.options()
+            simpleRouter.options()
             break;
           case "404":
-            simplerouter.error404()
+            simpleRouter.error404()
             break;
           case "500":
-            simplerouter.error500()
+            simpleRouter.error500()
             break;
         }
       });

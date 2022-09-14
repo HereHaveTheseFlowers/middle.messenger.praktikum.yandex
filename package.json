@@ -7,7 +7,7 @@
     "dev": "npm run clean && parcel src/index.html",
     "build": "npm run clean && parcel build src/index.html",
     "start": "npm run clean && parcel build src/index.html && node server.js",
-    "lint": "eslint ./src && npx stylelint **/*.sass "
+    "lint": "eslint ./src"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +28,6 @@
     "typescript": "4.8.3"
   },
   "dependenciesComments": {
-    "rimraf": "We're using rimraf so windows users can delete folders too. Just for now, we need to delete dist and parcel cache to avoid bugs"
+    "rimraf": "We're using rimraf so windows users can delete folders too. We need to delete dist and parcel cache to avoid bugs"
   }
 }

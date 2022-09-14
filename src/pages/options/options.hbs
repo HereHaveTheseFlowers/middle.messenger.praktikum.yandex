@@ -7,29 +7,29 @@
 </div>
 <div class="options__attribute__sizebig"></div>
 <div class="options__container options__profile">
-    {{#each  titles }} 
+    {{#each  profileList }} 
         {{{this}}}
     {{/each  }} 
-    {{{buttoneditinfo}}}
-    {{{buttonchangepassword}}}
-    {{{buttonbacktochats}}}
+    {{{buttonEditInfo}}}
+    {{{buttonChangePassword}}}
+    {{{buttonBackToChats}}}
 </div>
 
 <form class="options__container options__editinfo">
-    {{#each  titles__editinfo}} 
+    {{#each  editInfoList}} 
         {{{this}}}
     {{/each  }} 
     <div style="display: flex; justify-content: center">
-        {{{ buttonsaveinfo }}}
+        {{{ buttonSaveInfo }}}
     </div>
 </form>
 
 <form class="options__container options__editpassword">
-    {{#each  titles_editpassword}} 
+    {{#each  editPasswordList}} 
         {{{this}}}
     {{/each  }}
     <div style="display: flex; justify-content: center">
-        {{{buttonsavepassword}}}
+        {{{buttonSavePassword}}}
     </div>
 </form>
 
@@ -39,6 +39,6 @@
         <span class="avatarupload__title">Upload a file</span>
         <label for="fileupload" class="avatarupload__label">Choose a file on your computer</label>
         <input type="file" id="fileupload" name="avatar" class="avatarupload__input" multiple>
-        {{{buttonavatarupload}}}
+        {{{buttonAvatarUpload}}}
     </form>
 </div>

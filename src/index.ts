@@ -1,5 +1,5 @@
-import { simplerouter } from './utils/simplerouter';
+import { simpleRouter } from './utils/simpleRouter';
 
 window.addEventListener('DOMContentLoaded', () => {
-  simplerouter.temp();
+  simpleRouter.temp();
 });

@@ -1,11 +1,11 @@
 import template from './chat.hbs';
-import Block from '../../utils/Block';
+import Block from '../../../utils/Block';
 
 export interface ChatProps {
     name: string;
-    lastmessage: string;
-    lastmessagedate: string;
-    newmessages?: string;
+    lastMessage: string;
+    lastMessageDate: string;
+    newMessages?: string;
 }
 
 export class Chat extends Block<ChatProps> {

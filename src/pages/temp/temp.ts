@@ -4,9 +4,9 @@ import Block from '../../utils/Block';
     
 export class TempPage extends Block {
     constructor() {
-        super('div', {});
+        super('div');
     }
     render() {
-        return this.compile(template, {});
+        return this.compile(template, this.props);
     }
 }

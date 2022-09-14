@@ -1,28 +1,43 @@
 import template from './login.hbs';
 import Block from '../../utils/Block';
-import { Mainlogo } from '../../components/mainlogo';
-import { AuthRow, AuthProps } from '../../components/auth_row';
+import { MainLogo } from '../../components/mainLogo';
+import { Input, InputProps } from '../../components/input';
 import { Button } from '../../components/button';
-
-export const authrows: Array<object> = [ {div_class: "", name: "login", type: "text", placeholder: "Login"}, 
-                            {div_class: "", name: "password", type: "password", placeholder: "Password"} ]
-
-
-interface LoginPageProps {
-    authrows: Array<object>;
-    buttonlogin: Button;
-    buttonregister: Button;
-}
+import { inputsList } from './inputsList';
+import animateClick from '../../utils/animateClick';
+import { simpleRouter } from '../../utils/simpleRouter';
     
-export class LoginPage extends Block<LoginPageProps> {
-    constructor(props: LoginPageProps) {
-        super('div', props);
+export class LoginPage extends Block {
+    constructor() {
+        super('div');
         if(this.element) this.element.classList.add("flexcontainer")
     }
     init() {
-        this.children.mainlogo = new Mainlogo({});
-        this.childrenCollection.authrows = this.props.authrows.map((authrow: AuthProps) => new AuthRow(authrow))
-        this.props.authrows = [];
+        this.children.mainLogo = new MainLogo();
+        this.children.buttonLogin = new Button({
+            label: "Sign In",
+            addedClassList: ["login__submit"],
+            bgshape: true,
+            events: {
+              click: () => { 
+                animateClick(this.children.buttonLogin.element);
+              }
+            }
+        });
+        this.children.buttonRegister = new Button({
+            label: "Create account",
+            addedClassList: ["login__createaccount"],
+            type: "button",
+            events: {
+              click: () => { 
+                animateClick(this.children.buttonRegister.element);
+                setTimeout(() =>  {
+                  simpleRouter.registration()
+                }, 400);
+              }
+            }
+        });
+        this.childrenCollection.inputsList = inputsList.map((input: InputProps) => new Input(input))
     }
     render() {
         return this.compile(template, this.props );

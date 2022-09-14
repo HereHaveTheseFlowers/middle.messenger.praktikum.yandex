@@ -6,30 +6,28 @@ interface ButtonProps {
   events?: {
     click: () => void;
   };
-  added_class?: string | Array<string>;
+  addedClassList?: Array<string>;
   bgshape?: boolean;
-  type?: string;
-  shape_dir?: string;
+  type?: "button";
+  shapeDir?: "left" | "right";
 }
 
 export class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
     super('button', props);
-    if(this.element) this.element.classList.add("button")
-    if(props.added_class) {
-      if(Array.isArray(props.added_class)) {
-        for(const newclass of props.added_class) {
-          if(this.element) this.element.classList.add(newclass)
-        }
-      } else {
-        if(this.element) this.element.classList.add(props.added_class)
-      }
+
+    if(!this.element) return;
+
+    this.element.classList.add("button")
+    if(props.addedClassList) {
+      this.element.classList.add(...props.addedClassList)
     }
     if(props.bgshape) {
-      if(this.element) this.element.classList.add("button__bg")
+      this.element.classList.add("button__bg")
     }
     if(props.type) {
-      if(this.element) this.element.type = props.type
+      const thisbutton = this.element as HTMLButtonElement 
+      thisbutton.type = props.type
     }
   }
 

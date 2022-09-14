@@ -1,43 +1,81 @@
 import template from './chats.hbs';
 import Block from '../../utils/Block';
-import { Chat, ChatProps } from '../../components/chat';
+import { Chat, ChatProps } from './chat';
 import { Button } from '../../components/button';
 import { Arrow } from '../../components/arrow';
-            
-export const selectedchat: { name: string, messages: Array<object> } = { name: "Vadim", messages: [{ message: "Hello", date: "11:56", authorid: "1234" },
-{ message: "Hi!", date: "11:56", authorid: "12345" }]};
+import { chatsList } from './chatsList';
+import animateClick from '../../utils/animateClick'
+import  { simpleRouter } from '../../utils/simpleRouter'
 
-export const chats: Array<object> = [  { name: "Andrey",     lastmessage: "Image",   lastmessagedate: "10:49", newmessages: "2" }, 
-                            { name: "Movieclub",  lastmessage: "Hi!",     lastmessagedate: "12:00", newmessages: ""}, 
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "10:49", newmessages: "4"}, 
-                            { name: "Vadim",      lastmessage: "Hows it goint?", lastmessagedate: "10:49", newmessages: ""}, 
-                            { name: "tet-a-tet",  lastmessage: "Hi!",     lastmessagedate: "15:12", newmessages: ""}, 
-                            { name: "1, 2, 3",    lastmessage: "Hi!",     lastmessagedate: "Fr", newmessages: ""},
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "We", newmessages: ""}, 
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "Mo", newmessages: ""}, 
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "Mo", newmessages: ""}, 
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "May 1 2020", newmessages: ""}, 
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "Apr 13 2020", newmessages: ""}, 
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "Apr 13 2020", newmessages: ""}, 
-                            { name: "Ilia",       lastmessage: "Hello!",  lastmessagedate: "Apr 13 2020", newmessages: ""}]
+type SelectedChat = { name: string, messages: Array<Record<string, string>> }
 
-interface ChatsPageProps {
-  chats: Array<object>;
-  buttonprofile: Button;
-  arrow: Arrow;
-  buttonattachment: Button;
-  selectedchat: { name: string, messages: Array<object> };
-  buttonoptions: Button;
-}
-    
-export class ChatsPage extends Block<ChatsPageProps> {
-    constructor(props: ChatsPageProps) {
-        super('div', props);
+// Temporary solution while we dont recieve anything from the server
+export const selectedChat: SelectedChat = 
+{   
+    name: "Vadim", 
+    messages: [
+        { message: "Hello", date: "11:56", authorid: "1234" },
+        { message: "Hi!", date: "11:56", authorid: "12345" }
+    ]
+};
+
+export class ChatsPage extends Block {
+    constructor() {
+        super('div');
         if(this.element) this.element.classList.add("flexcontainer")
     }
     init() {
-        this.childrenCollection.chats = this.props.chats.map((selchat: ChatProps) => new Chat(selchat))
-        this.props.chats = [];
+        this.children.arrow = new Arrow({});
+        this.props.selectedChat = selectedChat;
+        this.children.buttonAttachment = new Button({
+            label: "",
+            addedClassList: ["selectedchat__attachment"],
+            type: "button",
+            events: {
+              click: () => { 
+                animateClick(this.children.buttonAttachment.element);
+                const selectedchat__attachment = document.querySelector(".selectedchat__attachment")
+                if(selectedchat__attachment) {
+                  selectedchat__attachment.addEventListener("click", function() {
+                    const attachmentmenu: HTMLElement | null = document.querySelector(".attachmentmenu")
+                    if(!attachmentmenu) {
+                        return;
+                    }
+                    if(!attachmentmenu.style.display) {
+                        attachmentmenu.style.display = "flex"
+                    }
+                    else {
+                        attachmentmenu.style.display = ""
+                    }
+                  });
+                }
+              }
+            }
+        });
+        this.children.buttonProfile = new Button({
+          label: "Profile >",
+          addedClassList: ["chatlist__profilebutton"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonProfile.element);
+              setTimeout(() =>  {
+                simpleRouter.temp()
+              }, 400);
+            }
+          }
+        });
+        this.children.buttonOptions = new Button({
+          label: "",
+          addedClassList: ["selectedchat__optionsbutton"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonOptions.element);
+            }
+          }
+        });
+        this.childrenCollection.chatsList = chatsList.map((selchat: ChatProps) => new Chat(selchat))
     }
     render() {
         return this.compile(template, this.props);

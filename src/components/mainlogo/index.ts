@@ -1,9 +1,9 @@
-import template from './mainlogo.hbs';
+import template from './mainLogo.hbs';
 import Block from '../../utils/Block';
 
-export class Mainlogo extends Block<Block> {
-    constructor(props?: Block) {
-        super('div', props);
+export class MainLogo extends Block {
+    constructor() {
+        super('div');
         if(this.element) this.element.classList.add("mainlogo__circle")
     }
 
