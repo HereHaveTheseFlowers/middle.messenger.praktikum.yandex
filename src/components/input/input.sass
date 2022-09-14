@@ -1,6 +1,7 @@
 .auth__field
     margin-top: 31px
     width: 100%
+    position: relative
 
 .auth__input
     border: none
@@ -18,3 +19,21 @@
 .auth__input:focus,
 .auth__input:hover
     border-bottom-color: rgba($color_light, 0.3)
+
+.input__error
+    position: absolute
+    top: 24px
+    right: 0
+    background: white
+    border-radius: 4px
+    padding: 2px
+    color: red
+    font-family: 'Inter', sans
+    font-style: normal
+    font-weight: 500
+    font-size: 13px
+    opacity: 0.7
+    user-select: none
+
+.input__error:hover
+    opacity: 0.2

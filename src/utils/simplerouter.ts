@@ -7,6 +7,7 @@ import { TempPage } from '../pages/temp/temp';
 
 import { Button } from '../components/button';
 import animateClick from './animateClick';
+import setupForm from './setupForm';
 
 //temporary simple router emplementation
 export const simpleRouter: Record<string, () => void> = {
@@ -18,16 +19,7 @@ export const simpleRouter: Record<string, () => void> = {
     root.innerHTML = '';
     root.append(loginPage.getContent()!);
     loginPage.dispatchComponentDidMount();
-  
-    document.querySelector('.login__form')!.addEventListener('submit', (e) => {
-      const formData = new FormData(e.target as HTMLFormElement);
-      e.preventDefault()
-      const output: Record<string, string> = {} 
-      for(const data of formData) {
-        output[data[0].toString()] = data[1].toString()
-      }
-      console.log(output);
-    });
+    setupForm('login__form');
   },  
   registration: function() { 
     const root = document.querySelector('#app');
@@ -37,6 +29,7 @@ export const simpleRouter: Record<string, () => void> = {
     root.innerHTML = '';
     root.append(registrationPage.getContent()!);
     registrationPage.dispatchComponentDidMount();
+    setupForm('registration__form');
   },  
   chats: function() { 
     const root = document.querySelector('#app');
@@ -46,6 +39,7 @@ export const simpleRouter: Record<string, () => void> = {
     root.innerHTML = '';
     root.append(chatsPage.getContent()!);
     chatsPage.dispatchComponentDidMount();
+    setupForm('selectedchat__messagefield');
   },  
   options: function() { 
     const root = document.querySelector('#app');
@@ -55,6 +49,8 @@ export const simpleRouter: Record<string, () => void> = {
     root.innerHTML = '';
     root.append(optionsPage.getContent()!);
     optionsPage.dispatchComponentDidMount();
+    setupForm('options__editpassword');
+    setupForm('options__editinfo');
   
     updateProfileInfo();
     const button__goback: HTMLElement | null = document.querySelector(".button__goback")

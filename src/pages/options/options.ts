@@ -17,7 +17,7 @@ export const userdata: { [index: string]: string; } = {
     firstname: 'Ivan',
     secondname: 'Ivanov',
     displayedname: 'Ivan',
-    phone: '+7 (909) 967 30 30',
+    phone: '+79099673030',
 }
 
 export function updateProfileInfo() {
@@ -38,8 +38,8 @@ export function updateProfileInfo() {
       let i = 0;
       for(const child of el.children) {
         if(hasClass(child, 'options__row')) {
-          if(!child.lastElementChild || !child.lastElementChild.lastElementChild) return
-          const inputv: HTMLInputElement = <HTMLInputElement>child.lastElementChild.lastElementChild
+          if(!child.lastElementChild || !child.lastElementChild.firstElementChild) return;
+          const inputv: HTMLInputElement = <HTMLInputElement>child.lastElementChild.firstElementChild
           inputv.value = Object.entries(userdata)[i][1];
           i++;
         }
