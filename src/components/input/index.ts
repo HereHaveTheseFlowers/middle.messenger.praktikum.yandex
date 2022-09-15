@@ -10,7 +10,7 @@ export interface InputProps {
     type: "text" | "password";
     placeholder: string;
     events: {
-        focusout: () => void;
+        focusout?: () => void;
     };
 }
 

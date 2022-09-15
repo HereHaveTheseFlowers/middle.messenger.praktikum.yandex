@@ -6,9 +6,7 @@ export const inputsList: Array<InputProps> =
         inputClass: "auth__input",
         name: "login", type: "text",
         placeholder: "Login",
-        events: {
-            focusout: () => { console.log("blur") }
-        }
+        events: {}
     }, 
     {
         divClassList: ["auth__field"],
@@ -16,8 +14,6 @@ export const inputsList: Array<InputProps> =
         name: "password",
         type: "password",
         placeholder: "Password",
-        events: { 
-            focusout: () => { console.log("blur") }
-        }
+        events: {}
     }
 ]
