@@ -5,7 +5,6 @@ export const inputsList: Array<InputProps> =
     { 
         divClassList: ["registration__field", "auth__field"],
         events: {
-            focusout: () => { console.log('blur') }
         },
         inputClass: "auth__input",
         name: "email",
@@ -15,7 +14,6 @@ export const inputsList: Array<InputProps> =
     { 
         divClassList: ["registration__field", "auth__field"],
         events: {
-            focusout: () => { console.log('blur') } 
         },
         inputClass: "auth__input",
         name: "login",
@@ -25,7 +23,6 @@ export const inputsList: Array<InputProps> =
     { 
         divClassList: ["registration__field", "auth__field"],
         events: {
-            focusout: () => { console.log('blur') }
         },
         inputClass: "auth__input",
         name: "first_name",
@@ -35,7 +32,6 @@ export const inputsList: Array<InputProps> =
     { 
         divClassList: ["registration__field", "auth__field"],
         events: { 
-            focusout: () => { console.log('blur') }
         },
         inputClass: "auth__input",
         name: "second_name",
@@ -45,7 +41,6 @@ export const inputsList: Array<InputProps> =
     { 
         divClassList: ["registration__field", "auth__field"],
         events: { 
-            focusout: () => { console.log('blur') }
         },
         inputClass: "auth__input",
         name: "phone",
@@ -55,7 +50,6 @@ export const inputsList: Array<InputProps> =
     { 
         divClassList: ["registration__field", "auth__field"],
         events: { 
-            focusout: () => { console.log('blur') }
         },
         inputClass: "auth__input",
         name: "password",
@@ -65,7 +59,6 @@ export const inputsList: Array<InputProps> =
     { 
         divClassList: ["registration__field", "auth__field"],
         events: { 
-            focusout: () => { console.log('blur') }
         },
         inputClass: "auth__input",
         name: "password",

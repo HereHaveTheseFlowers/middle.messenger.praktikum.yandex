@@ -23,11 +23,7 @@ export class OptionsRow extends Block<OptionsRowProps> {
                 name: this.props.name?.toString() as string,
                 type: this.props.type?.toString() as "text" | "password",
                 placeholder: this.props.placeholder?.toString() as string,
-                events: { 
-                    focusout: () => { 
-                        console.log("blur") 
-                    }
-                }
+                events: {}
             });
             this.props.input = '';
         }
