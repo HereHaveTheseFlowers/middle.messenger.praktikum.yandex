@@ -21,6 +21,10 @@ export default function setupForm(formClass: string) {
         errorDiv.append(errorIcon);
         errorDiv.textContent += req;
         errorDiv.style.zIndex = "6000";
+        errorDiv.addEventListener('click', (e) => {
+          e.preventDefault();
+          errorDiv.style.display = 'none';
+        });
         element.append(errorDiv);
         return;
       }

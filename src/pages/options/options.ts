@@ -5,10 +5,11 @@ import { Button } from '../../components/button';
 import { Arrow } from '../../components/arrow';
 import animateClick from '../../utils/animateClick';
 import hasClass from '../../utils/hasClass';
-import { simpleRouter } from '../../utils/simpleRouter';
-import { editPasswordList } from './editPasswordList'
-import { editInfoList } from './editInfoList'
-import { profileList } from './profileList'
+import Router from '../../utils/Router';
+import { editPasswordList } from './editPasswordList';
+import { editInfoList } from './editInfoList';
+import { profileList } from './profileList';
+import setupForm from '../../utils/setupForm';
 
 // Temporary solution while we dont recieve anything from the server
 export const userdata: { [index: string]: string; } = {
@@ -66,7 +67,7 @@ export class OptionsPage extends Block {
                 click: () => { 
                     animateClick(this.children.buttonBackToChats.element);
                     setTimeout(() =>  {
-                        simpleRouter.temp()
+                        Router.go('/messenger')
                     }, 400);
                 }
             }
@@ -163,6 +164,47 @@ export class OptionsPage extends Block {
         this.childrenCollection.profileList = profileList.map((title: OptionsRowProps) => new OptionsRow(title))
         this.childrenCollection.editInfoList = editInfoList.map((title: OptionsRowProps) => new OptionsRow(title))
         this.childrenCollection.editPasswordList = editPasswordList.map((title: OptionsRowProps) => new OptionsRow(title))
+    }
+
+    componentDidMount() {
+        
+      setupForm('options__editpassword');
+      setupForm('options__editinfo');
+    
+      updateProfileInfo();
+      const button__goback: HTMLElement | null = document.querySelector(".button__goback")
+      if(button__goback) {
+        button__goback.addEventListener("click", function() {
+          animateClick(button__goback);
+          setTimeout(() =>  {
+              Router.go('/temp')
+          }, 400);
+        });
+      }
+      const avatar__edit = document.querySelector(".avatar__edit")
+      if(avatar__edit) {
+        avatar__edit.addEventListener("click", function() {
+          const avatarupload: HTMLElement | null  = document.querySelector(".avatarupload")
+          if(avatarupload) {
+            avatarupload.style.display = 'flex';
+            setTimeout(() =>  {
+              avatarupload.style.opacity = '1';
+            }, 1);
+          }
+        });
+      }
+      const avatarupload__background = document.querySelector(".avatarupload__background")
+      if(avatarupload__background) {
+        avatarupload__background.addEventListener("click", function() {
+          const avatarupload: HTMLElement | null  = document.querySelector(".avatarupload")
+          if(!avatarupload) return;
+          if(avatarupload.style.opacity != '1') return;
+          avatarupload.style.opacity = '0'
+          setTimeout(() =>  {
+              avatarupload.style.display = 'none'
+          }, 200);
+        });
+      }
     }
     render() {
         return this.compile(template, this.props);

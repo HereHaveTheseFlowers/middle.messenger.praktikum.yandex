@@ -44,6 +44,10 @@ export class Input extends Block<InputProps> {
         errorDiv.append(errorIcon);
         errorDiv.textContent += req;
         errorDiv.style.zIndex = "6000"
+        errorDiv.addEventListener('click', (e) => {
+          e.preventDefault();
+          errorDiv.style.display = 'none';
+        });
         return errorDiv;
     }
     private cleanErrors() {

@@ -5,7 +5,8 @@ import { Button } from '../../components/button';
 import { Arrow } from '../../components/arrow';
 import { chatsList } from './chatsList';
 import animateClick from '../../utils/animateClick'
-import  { simpleRouter } from '../../utils/simpleRouter'
+import Router from '../../utils/Router'
+import setupForm from '../../utils/setupForm';
 
 type SelectedChat = { name: string, messages: Array<Record<string, string>> }
 
@@ -60,7 +61,7 @@ export class ChatsPage extends Block {
             click: () => { 
               animateClick(this.children.buttonProfile.element);
               setTimeout(() =>  {
-                simpleRouter.temp()
+                Router.go('/settings')
               }, 400);
             }
           }
@@ -76,6 +77,16 @@ export class ChatsPage extends Block {
           }
         });
         this.childrenCollection.chatsList = chatsList.map((selchat: ChatProps) => new Chat(selchat))
+    }
+    
+    componentDidMount() {
+      setupForm('selectedchat__messagefield');
+      const selectedchat__buttonsend: HTMLElement | null = document.querySelector(".selectedchat__buttonsend")
+      if(selectedchat__buttonsend) {
+        selectedchat__buttonsend.addEventListener("click", function() {
+          animateClick(selectedchat__buttonsend);
+        });
+      }
     }
     render() {
         return this.compile(template, this.props);

@@ -5,7 +5,8 @@ import { Input, InputProps } from '../../components/input';
 import { Button } from '../../components/button';
 import { inputsList } from './inputsList';
 import animateClick from '../../utils/animateClick';
-import { simpleRouter } from '../../utils/simpleRouter';
+import Router from '../../utils/Router';
+import setupForm from '../../utils/setupForm';
     
 export class LoginPage extends Block {
     constructor() {
@@ -32,12 +33,15 @@ export class LoginPage extends Block {
               click: () => { 
                 animateClick(this.children.buttonRegister.element);
                 setTimeout(() =>  {
-                  simpleRouter.registration()
+                  Router.go('/sign-up')
                 }, 400);
               }
             }
         });
         this.childrenCollection.inputsList = inputsList.map((input: InputProps) => new Input(input))
+    }
+    componentDidMount() {
+      setupForm('login__form');
     }
     render() {
         return this.compile(template, this.props );
