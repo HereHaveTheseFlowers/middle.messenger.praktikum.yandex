@@ -5,6 +5,9 @@ import { RegistrationPage } from './pages/registration/registration';
 import { ChatsPage } from './pages/chats/chats';
 import { OptionsPage } from './pages/options/options';
 import { ErrorPage } from './pages/error/error';
+import AuthController from './controllers/AuthController';
+
+AuthController.fetchUser();
 
 enum Routes {
   Index = '/',
@@ -16,7 +19,7 @@ enum Routes {
   error505 = '/500'
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
   Router
     .use(Routes.Temp, TempPage)
     .use(Routes.Index, LoginPage)

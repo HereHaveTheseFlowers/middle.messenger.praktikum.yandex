@@ -11,7 +11,7 @@ class Block<P extends Record<string, any> = any> {
   } as const;
 
   public id = nanoid(6);
-  protected props: P;
+  public props: P;
   public children: Record<string, Block>;
   public childrenCollection: Record<string, Array<Block>>;
   private eventBus: () => EventBus;
@@ -22,7 +22,6 @@ class Block<P extends Record<string, any> = any> {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren as P);
-    this.childrenCollection = {};
     this._meta = {
       tagName,
       props: props
@@ -30,6 +29,7 @@ class Block<P extends Record<string, any> = any> {
 
     this.children = children;
     this.props = this._makePropsProxy(props);
+    this.childrenCollection = this._makeChildrenCollectionProxy({});
 
     this.eventBus = () => eventBus;
 
@@ -178,7 +178,6 @@ class Block<P extends Record<string, any> = any> {
   }
 
   _makePropsProxy(props: P) {
-    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props, {
@@ -191,8 +190,6 @@ class Block<P extends Record<string, any> = any> {
 
         target[prop as keyof P] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
@@ -201,7 +198,27 @@ class Block<P extends Record<string, any> = any> {
       }
     });
   }
+  _makeChildrenCollectionProxy(childrenCollection: Record<string, any>) {
+    const self = this;
 
+    return new Proxy(childrenCollection, {
+      get(target, prop: string) {
+        const value = target[prop];
+        return typeof value === "function" ? value.bind(target) : value;
+      },
+      set(target, prop: string, value) {
+        const oldTarget = { ...target }
+
+        target[prop as string] = value;
+
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+        return true;
+      },
+      deleteProperty() {
+        throw new Error("Нет доступа");
+      }
+    });
+  }
   _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
@@ -214,6 +231,9 @@ class Block<P extends Record<string, any> = any> {
   hide() {
     this.getContent()!.style.display = "none";
   }
+
+  public onSubmit(data: Record<string, any>, submitType: string) { /* This gets rewritten by things that extend Block  */ }
+
 }
 
 export default Block;

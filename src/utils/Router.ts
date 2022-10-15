@@ -1,4 +1,5 @@
 import Block from './Block';
+import store from './Store';
 
 function isEqual(lhs: string, rhs: string): boolean {
     return lhs === rhs;
@@ -95,6 +96,11 @@ class Router {
     }
 
     public go(pathname: string) {
+        if(pathname !== '/' && pathname !== '/sign-up' && !store.getState().user) {
+            this.go('/');
+            console.log('Please sign in first');
+            return;
+        }
         this.history.pushState({}, '', pathname);
 
         this._onRoute(pathname);

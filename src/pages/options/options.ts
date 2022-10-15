@@ -10,43 +10,9 @@ import { editPasswordList } from './editPasswordList';
 import { editInfoList } from './editInfoList';
 import { profileList } from './profileList';
 import setupForm from '../../utils/setupForm';
-
-// Temporary solution while we dont recieve anything from the server
-export const userdata: { [index: string]: string; } = {
-    email: 'pochta@yandex.ru',
-    login: 'ivanivanov',
-    firstname: 'Ivan',
-    secondname: 'Ivanov',
-    displayedname: 'Ivan',
-    phone: '+79099673030',
-}
-
-export function updateProfileInfo() {
-    for(const elName of document.getElementsByClassName('options__attribute__sizebig')) {
-        elName.textContent = userdata.displayedname;
-    }
-    for(const el of document.getElementsByClassName('options__profile')) {
-      let i = 0;
-      for(const child of el.children) {
-        if(hasClass(child, 'options__row')) {
-          if(!child.lastElementChild) return
-          child.lastElementChild.textContent = Object.entries(userdata)[i][1];
-          i++;
-        }
-      }
-    }
-    for(const el of document.getElementsByClassName('options__editinfo')) {
-      let i = 0;
-      for(const child of el.children) {
-        if(hasClass(child, 'options__row')) {
-          if(!child.lastElementChild || !child.lastElementChild.firstElementChild) return;
-          const inputv: HTMLInputElement = <HTMLInputElement>child.lastElementChild.firstElementChild
-          inputv.value = Object.entries(userdata)[i][1];
-          i++;
-        }
-      }
-    }
-  }
+import store from '../../utils/Store';
+import UserController from '../../controllers/UserController';
+import { ChangeProfileData, ChangePasswordData } from '../../api/UserAPI';
 
 export class OptionsPage extends Block {
     constructor() {
@@ -55,8 +21,11 @@ export class OptionsPage extends Block {
         this.element!.classList.add("options")
     }
     init() {
-        this.children.arrow = new Arrow({ flip: true });
+        store.on('user', () => {
+          this.updateProfileInfo();
+        });
 
+        this.children.arrow = new Arrow({ flip: true });
         this.children.buttonBackToChats = new Button({
             label: "Back to chats",
             addedClassList: ["options__button", "options__button__backtochats"],
@@ -108,10 +77,8 @@ export class OptionsPage extends Block {
                 }
             }
           });
-
         this.children.buttonAvatarUpload = new Button({
             label: "Submit",
-            type: "button",
             events: {
               click: () => { 
                 animateClick(this.children.buttonAvatarUpload.element);
@@ -128,7 +95,6 @@ export class OptionsPage extends Block {
         this.children.buttonSavePassword = new Button({
             label: "Save",
             addedClassList: ["options__button", "options__button__savepassword"],
-            type: "button",
             bgshape: true,
             events: {
               click: () => {
@@ -146,10 +112,9 @@ export class OptionsPage extends Block {
         this.children.buttonSaveInfo = new Button({
             label: "Save",
             addedClassList: ["options__button", "options__button__saveinfo"],
-            type: "button",
             bgshape: true,
             events: {
-              click: () => { 
+              click: () => {
                 animateClick(this.children.buttonSaveInfo.element);
                 setTimeout(() =>  {
                   for(const editinfo of document.querySelectorAll<HTMLElement>('.options__editinfo'))
@@ -167,17 +132,17 @@ export class OptionsPage extends Block {
     }
 
     componentDidMount() {
-        
-      setupForm('options__editpassword');
-      setupForm('options__editinfo');
+      setupForm('options__editpassword', this);
+      setupForm('options__editinfo', this);
+      setupForm('avatarupload__form', this, true);
     
-      updateProfileInfo();
+      this.updateProfileInfo();
       const button__goback: HTMLElement | null = document.querySelector(".button__goback")
       if(button__goback) {
         button__goback.addEventListener("click", function() {
           animateClick(button__goback);
           setTimeout(() =>  {
-              Router.go('/temp')
+            Router.go('/messenger')
           }, 400);
         });
       }
@@ -204,6 +169,53 @@ export class OptionsPage extends Block {
               avatarupload.style.display = 'none'
           }, 200);
         });
+      }
+    }
+    public updateProfileInfo() {
+      if(!store.getState().user) return;
+      const userdata: Record<string, any> | undefined = store.getState().user;
+      if(!userdata) return;
+      if(!userdata.display_name) userdata.display_name = userdata.first_name;
+      if(userdata.avatar) {
+        const avatarImage = document.querySelector('.avatar__image') as HTMLImageElement;
+        if(avatarImage) avatarImage.src = 'https://ya-praktikum.tech/api/v2/resources' + userdata.avatar;
+      }
+      for(const elName of document.getElementsByClassName('options__attribute__sizebig')) {
+        elName.textContent = userdata.display_name;
+      }
+      for(const el of document.getElementsByClassName('options__profile')) {
+        for(const child of el.children) {
+          if(hasClass(child, 'options__row')) {
+            if(!child.lastElementChild || !child.firstElementChild) return
+            for(const instance of profileList) {
+              if(instance.name && instance.attrFirst === child.firstElementChild.textContent) {
+                child.lastElementChild.textContent = userdata[instance.name];
+              }
+            }
+          }
+        }
+      }
+      for(const el of document.getElementsByClassName('options__editinfo')) {
+        for(const child of el.children) {
+          if(hasClass(child, 'options__row')) {
+            if(!child.lastElementChild || !child.lastElementChild.firstElementChild || !child.firstElementChild) return;
+            const inputv: HTMLInputElement = <HTMLInputElement>child.lastElementChild.firstElementChild
+            for(const instance of editInfoList) {
+              if(instance.name && instance.attrFirst === child.firstElementChild.textContent) {
+                inputv.value = userdata[instance.name]
+              }
+            }
+          }
+        }
+      }
+    }
+    onSubmit(data: ChangeProfileData | ChangePasswordData | FormData, submitType: string) {
+      if(submitType === 'options__editpassword') {
+        UserController.updatePassword(data as ChangePasswordData);
+      } else if(submitType === 'options__editinfo') {
+        UserController.updateProfile(data as ChangeProfileData);
+      } else {
+        UserController.updateAvatar(data as FormData)
       }
     }
     render() {
