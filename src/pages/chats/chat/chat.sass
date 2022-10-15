@@ -7,6 +7,10 @@
     display: flex
     justify-content: center
     align-items: center
+    &:hover
+        .chat__container
+            background: rgba($color_normal, 0.4)
+        
 
 .chat__container
     position: absolute
@@ -83,6 +87,6 @@
 
 .chat__active
     .chat__container
-        background: $color_normal
+        background: $color_normal !important
         .chat__avatar
             background: $color_light

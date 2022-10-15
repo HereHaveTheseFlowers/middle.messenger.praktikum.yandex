@@ -1,11 +1,16 @@
 
 <div class="chatlist">
+    {{{buttonLogout}}}
     {{{buttonProfile}}}
-    <input type="search" class="chatlist__search" name="chatsearch" placeholder="Search">
+    <input type="text" class="chatlist__search" name="chatsearch" placeholder="Search" autocomplete="off">
     <div class="chatlist__list">
         {{#each chatsList}}
             {{{this}}}
         {{/each}} 
+        <div class="menu__section chatlist__create">
+            <div class="menu__image optionsmenu__image__add"></div>
+            {{{buttonCreateChatMenu}}}
+        </div>
     </div>
 </div>
 <div class="selectedchat">
@@ -19,21 +24,57 @@
     </div>
     <form class="selectedchat__messagefield">
         {{{buttonAttachment}}}
-        <div class="attachmentmenu">
-            <button type="button" class="attachmentmenu__button animate-click">
-                <div class="attachmentmenu__image attachmentmenu__image__media"></div><span class="attachmentmenu__text">Photo or Video</span>
-            </button>
-            <button type="button" class="attachmentmenu__button animate-click">
-                <div class="attachmentmenu__image attachmentmenu__image__file"></div><span class="attachmentmenu__text">File</span>
-            </button>
-            <button type="button" class="attachmentmenu__button animate-click">
-                <div class="attachmentmenu__image attachmentmenu__image__loc"></div><span class="attachmentmenu__text">Location</span>
-            </button>
+        <div class="menu attachmentmenu">
+            <div class="menu__section">
+                <div class="menu__image attachmentmenu__image__media"></div>
+                <span class="menu__button">Photo or Video</span>
+            </div>
+            <div class="menu__section">
+                <div class="menu__image attachmentmenu__image__file"></div>
+                <span class="menu__button">File</span>
+            </div>
+            <div class="menu__section">
+                <div class="menu__image attachmentmenu__image__loc"></div>
+                <span class="menu__button">Location</span>
+            </div>
         </div>
-        <input type="text" class="selectedchat__message" name="message" placeholder="Message">
+        <input type="text" class="selectedchat__message" name="message" placeholder="Message" autocomplete="off">
         <button class="selectedchat__buttonsend animate-click">
             {{{arrow}}}
         </button>
+    </form>
+    <div class="menu optionsmenu">
+        <div class="menu__section">
+            <div class="menu__image optionsmenu__image__add"></div>
+            {{{buttonAddUserMenu}}}
+        </div>
+        <div class="menu__section">
+            <div class="menu__image optionsmenu__image__remove"></div>
+            {{{buttonRemoveUserMenu}}}
+        </div>
+        <div class="menu__section">
+            <div class="menu__image optionsmenu__image__remove"></div>
+            {{{buttonRemoveChatMenu}}}
+        </div>
+    </div>
+    <form class="menu addusermenu">
+        Add a user
+        <div style="width: 280px">{{{inputAddUser}}}</div>
+        {{{buttonAddUser}}}
+    </form>
+    <form class="menu removeusermenu">
+        Delete user
+        <div style="width: 280px">{{{inputRemoveUser}}}</div>
+        {{{buttonRemoveUser}}}
+    </form>
+    <form class="menu createchatmenu">
+        Enter chat name
+        <div style="width: 280px">{{{inputCreateChat}}}</div>
+        {{{buttonCreateChat}}}
+    </form>
+    <form class="menu removechatmenu">
+        Are you sure you want to delete this chat?
+        {{{buttonRemoveChat}}}
     </form>
     {{else}}
     Choose a chat to send messages

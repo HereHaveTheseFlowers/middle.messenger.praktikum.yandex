@@ -18,12 +18,23 @@
     height: 12px
     font-size: 12px
 
+.chatlist__logoutbutton
+    left: 0
+    position: absolute
+    margin-left: 10px
+    margin-top: 20px
+    display: inline
+    width: 50px
+    height: 12px
+    font-size: 12px
+
 .chatlist__search
     display: block
     margin-top: 56px
     width: 90%
     margin: 56px auto 14px auto
     height: 32px
+    color: $color_dark
     background: $color_normal
     border-radius: 5px
     text-align: center
@@ -39,6 +50,8 @@
         transition: 0.2s opacity
     &:focus::placeholder
         opacity: 0
+    &:focus
+        outline: 2px solid $color_dark
 
 .chatlist__list
     flex: 1
@@ -97,6 +110,20 @@
 .selectedchat__body
     width: 95%
     flex: 1
+    display: flex
+    align-items: flex-start
+    overflow-y: scroll
+    padding-right: 5px
+    flex-direction: column-reverse
+    &:hover::-webkit-scrollbar-thumb
+        background: rgba($color_normal, 0.6)
+    &::-webkit-scrollbar
+        border-radius: 10px
+        width: 5px
+        background: transparent
+    &::-webkit-scrollbar-thumb
+        border-radius: 10px
+
 
 .selectedchat__messagefield
     position: relative
@@ -111,35 +138,98 @@
     width: 32px
     height: 32px
 
-.attachmentmenu
+.menu
     position: absolute
-    width: 162px
-    height: 128px
-    left: 0
-    top: -265%
     background: $color_normal
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
     border-radius: 12px
     display: none
     flex-direction: column
     align-items: center
-    justify-content: center
+    justify-content: space-evenly
 
+.menu__button
+    flex: 1
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    color: $color_dark
+    text-align: left
 
-.attachmentmenu__button
+.menu__section
     display: flex
     align-items: center
     width: 130px
     padding: 0
-    height: 33%
+    height: 25px
     background: transparent
     border: 0
-    cursor: pointer
 
-.attachmentmenu__image
+.menu__image
     width: 22px
     height: 22px
     margin-right: 15px
+
+.optionsmenu
+    width: 210px
+    height: 135px
+    right: 10px
+    top: 65px
+
+.attachmentmenu
+    top: -265%
+    width: 162px
+    height: 128px
+    left: 0
+
+.addusermenu
+    width: 340px
+    height: 257px
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 15px
+
+.removeusermenu
+    width: 340px
+    height: 257px
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 15px
+
+.createchatmenu
+    width: 340px
+    height: 257px
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 15px
+
+.removechatmenu
+    width: 340px
+    height: 257px
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 15px
+
+.chatlist__create
+    justify-content: center
+    width: 100%
+    height: 50px
+    padding: 5px
+
+.chatlist__createbutton
+    width: 70px
+    flex: none
+
+.optionsmenu__image__add
+    background: url("./img/add.svg") no-repeat
+
+.optionsmenu__image__remove
+    background: url("./img/remove.svg") no-repeat
 
 .attachmentmenu__image__media
     background: url("./img/media.svg") no-repeat
@@ -150,15 +240,6 @@
 .attachmentmenu__image__loc
     background: url("./img/location.svg") no-repeat
 
-.attachmentmenu__text
-    flex: 1
-    font-family: 'Inter'
-    font-style: normal
-    font-weight: 500
-    font-size: 12px
-    color: $color_dark
-    text-align: left
-
 .selectedchat__message
     flex: 1
     margin: 0 10px
@@ -167,6 +248,11 @@
     background: $color_normal
     border-radius: 30px
     border: 0
+    color: $color_dark
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
     &::placeholder
         color: $color_dark
         opacity: 1
@@ -177,6 +263,8 @@
         transition: 0.2s opacity
     &:focus::placeholder
         opacity: 0
+    &:focus
+        outline: 2px solid $color_dark
 
 .selectedchat__buttonsend
     width: 28px
