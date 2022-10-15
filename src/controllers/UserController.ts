@@ -21,7 +21,7 @@ export class UserController {
   async updateAvatar(data: FormData) {
     try {
       await this.api.updateAvatar(data);
-      
+
       await this.fetchUser();
 
     } catch (e: any) {

@@ -42,7 +42,7 @@ export class UserAPI extends BaseAPI {
     return this.http.put('/password', data);
   }
   updateAvatar(data: FormData) {
-    return this.http.put('/profile/avatar', data);
+    return this.http.put('/profile/avatar', data, true);
   }
 
   read(identifier: string | number): Promise<User> {
