@@ -9,6 +9,7 @@ export enum Method {
 type Options = {
     method: Method;
     data?: any;
+    sendingjson?: boolean;
 };
 
 export default class HTTPTransport {
@@ -30,10 +31,11 @@ export default class HTTPTransport {
         });
     }
 
-    public put<Response = void>(path: string, data: unknown): Promise<Response> {
+    public put<Response = void>(path: string, data: unknown, sendingjson?: boolean): Promise<Response> {
         return this.request<Response>(this.endpoint + path, {
         method: Method.Put,
         data,
+        sendingjson,
         });
     }
 
@@ -51,7 +53,7 @@ export default class HTTPTransport {
         });
     }
 
-    private request<Response>(url: string, options: Options = {method: Method.Get}): Promise<Response> {
+    private request<Response>(url: string, options: Options = {method: Method.Get}, sendingjson?: boolean): Promise<Response> {
         const {method, data} = options;
 
         return new Promise((resolve, reject) => {
@@ -73,14 +75,14 @@ export default class HTTPTransport {
         xhr.onerror = () => reject({reason: 'network error'});
         xhr.ontimeout = () => reject({reason: 'timeout'});
 
-        //xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.responseType = 'json';
 
         xhr.withCredentials = true;
 
         if (method === Method.Get || !data) {
             xhr.send();
-        } else if(typeof data[0] === 'string') {
+        } else if(!sendingjson) {
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(data));
         } else {
             xhr.send(data);

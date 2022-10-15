@@ -12,6 +12,7 @@ export class AuthController {
 
   async signin(data: SigninData) {
     try {
+      console.log(data)
       await this.api.signin(data);
 
       await this.fetchUser();

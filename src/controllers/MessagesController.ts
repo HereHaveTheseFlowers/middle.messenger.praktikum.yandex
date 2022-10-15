@@ -78,7 +78,6 @@ class MessagesController {
 
     messagesToAdd = [...currentMessages, ...messagesToAdd];
     messagesToAdd = messagesToAdd.filter(message => message.type === "message")
-    console.log(messagesToAdd)
     store.set(`messages.${id}`, messagesToAdd);
   }
 
