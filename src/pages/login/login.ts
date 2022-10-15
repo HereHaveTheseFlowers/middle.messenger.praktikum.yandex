@@ -1,6 +1,6 @@
 import template from './login.hbs';
 import Block from '../../utils/Block';
-import { MainLogo } from '../../components/mainlogo1';
+import { MainLogo } from '../../components/mainLogo';
 import { Input, InputProps } from '../../components/input';
 import { Button } from '../../components/button';
 import { inputsList } from './inputsList';
