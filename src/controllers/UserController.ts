@@ -47,6 +47,14 @@ export class UserController {
       return false;
     }
   }
+  async findUserByID(identifier: string | number) {
+    try {
+      return await this.api.read(identifier);
+    } catch (e: any) {
+      console.error(e.message);
+      return false;
+    }
+  }
 
   async fetchUser() {
     if(!store.getState().user || !store.getState().user.id) return;
