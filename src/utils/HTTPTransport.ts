@@ -35,8 +35,8 @@ export default class HTTPTransport {
         return this.request<Response>(this.endpoint + path, {
         method: Method.Put,
         data,
-        sendingjson,
-        });
+        },
+        sendingjson);
     }
 
     public patch<Response = void>(path: string, data: unknown): Promise<Response> {

@@ -296,6 +296,7 @@ export class ChatsPage extends Block {
           messageDir: messageDir,
           time: message.time,
           content: message.content,
+          user_id: message.user_id
         });
         if(messageBlock.element) chatBody?.prepend(messageBlock.element)
       }
