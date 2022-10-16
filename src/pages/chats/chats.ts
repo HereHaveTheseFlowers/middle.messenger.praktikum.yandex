@@ -288,6 +288,14 @@ export class ChatsPage extends Block {
     updateMessageView() {
       if(!store.getState().selectedChat || !store.getState().messages) return;
       this.props.selectedChat = store.getState().selectedChat;
+      for(const chat of store.getState().chats) {
+        if(chat.id === this.props.selectedChat) {
+          const selectedchatName = document.querySelector('.selectedchat__name');
+          if(selectedchatName) {
+            selectedchatName.textContent = chat.title;
+          }
+        }
+      }
       const chatBody = document.querySelector('.selectedchat__body');
       if(!store.getState().messages[this.props.selectedChat]) return;
       for(const message of store.getState().messages[this.props.selectedChat]) {
