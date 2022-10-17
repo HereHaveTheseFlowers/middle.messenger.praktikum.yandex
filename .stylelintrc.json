@@ -1,6 +1,6 @@
 {
-    "extends": "stylelint-config-sass-guidelines",
-    "rules": {
-      "indentation": null
-    }
+  "extends": "stylelint-config-sass-guidelines",
+  "rules": {
+    "indentation": null
+  }
 }

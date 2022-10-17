@@ -3,5 +3,8 @@
   "transformers": {
     "*.hbs": ["@anikin/parcel-transformer-handlebars-precompile"],
 		"*.svg": ["@parcel/transformer-raw"]
+  },
+  "optimizers": {
+    "*.css": []
   }
 } 
