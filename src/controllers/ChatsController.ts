@@ -11,34 +11,73 @@ class ChatsController {
   }
 
   async create(title: string) {
-    await this.api.create(title);
+    try {
 
-    this.fetchChats();
+      await this.api.create(title);
+      this.fetchChats();
+
+    } catch (e: any) {
+
+      console.error(e.message);
+
+    }
   }
 
   async fetchChats() {
-    const chats = await this.api.read();
+    try {
+  
+      const chats = await this.api.read();
 
-    chats.map(async (chat) => {
-      const token = await this.getToken(chat.id);
+      chats.map(async (chat) => {
+        const token = await this.getToken(chat.id);
 
-      await MessagesController.connect(chat.id, token);
-    });
-    store.set('chats', chats);
+        await MessagesController.connect(chat.id, token);
+      });
+      store.set('chats', chats);
+
+    } catch (e: any) {
+
+      console.error(e.message);
+
+    }
   }
 
-  addUserToChat(id: number, userId: number) {
-    this.api.addUsers(id, [userId]);
+  async addUserToChat(id: number, userId: number) {
+    try {
+
+      await this.api.addUsers(id, [userId]);
+
+    } catch (e: any) {
+
+      console.error(e.message);
+
+    }
   }
 
-  removeUserFromChat(id: number, userId: number) {
-    this.api.deleteUsers(id, [userId]);
+  async removeUserFromChat(id: number, userId: number) {
+    try {
+
+      await this.api.deleteUsers(id, [userId]);
+
+    } catch (e: any) {
+
+      console.error(e.message);
+
+    }
   }
 
   async delete(id: number) {
-    await this.api.delete(id);
+    try {
 
-    this.fetchChats();
+      await this.api.delete(id);
+
+      this.fetchChats();
+
+    } catch (e: any) {
+
+      console.error(e.message);
+
+    }
   }
 
   getToken(id: number) {

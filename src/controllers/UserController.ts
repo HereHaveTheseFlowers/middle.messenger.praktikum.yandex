@@ -58,8 +58,16 @@ export class UserController {
 
   async fetchUser() {
     if(!store.getState().user || !store.getState().user.id) return;
-    const user = await this.api.read(store.getState().user.id);
-    store.set('user', user);
+    try {
+
+      const user = await this.api.read(store.getState().user.id);
+      store.set('user', user);
+
+    } catch (e: any) {
+
+      console.error(e.message);
+
+    }
   }
 }
 
