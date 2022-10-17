@@ -9,7 +9,6 @@ https://joyful-puffpuff-edbf85.netlify.app
 https://www.figma.com/file/1TpBSm2GhzmmtlsJgFTXmf/Chat_SergeiKozlov?node-id=0%3A1
 
 ## Installation
-
 The following are the commands required to run the project:
 
 - `npm run start` — build and launch the project on port 3000 using Express and Parcel.

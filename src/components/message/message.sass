@@ -1,0 +1,56 @@
+.message
+    display: flex
+    margin-bottom: 18px
+    position: relative
+
+.message__title
+    position: absolute
+    top: -15px
+    font-size: 10px
+
+.message__wrapper
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    line-height: 15px
+    padding: 11px
+    padding-right: 35px
+    background: $color_light
+    border-radius: 12px
+    position: relative
+
+.message__left
+    float: left
+    align-self: start
+    .message__wrapper
+        border-top-left-radius: 0px
+
+.message__right
+    float: right
+    align-self: end
+    .message__wrapper
+        border-top-right-radius: 0px
+        background: $color_normal
+
+.message__avatar
+    margin-right: 7px
+    background: $color_light
+    height: 30px
+    border-radius: 50%
+    width: 30px
+    overflow: hidden
+
+.message__avatarimage
+    height: 100%
+    width: auto
+
+.message__time
+    position: absolute
+    color: #999999
+    font-family: 'Inter'
+    font-style: normal
+    font-weight: 500
+    font-size: 9px
+    bottom: 1px
+    right: 5px

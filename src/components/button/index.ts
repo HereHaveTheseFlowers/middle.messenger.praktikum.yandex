@@ -4,7 +4,7 @@ import template from './button.hbs';
 interface ButtonProps {
   label?: string;
   events?: {
-    click: () => void;
+    click: (e?: any) => void;
   };
   addedClassList?: Array<string>;
   bgshape?: boolean;
