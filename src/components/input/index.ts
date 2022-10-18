@@ -8,7 +8,7 @@ export interface InputProps {
     divClassList?: Array<string>;
     name: string;
     type: "text" | "password";
-    placeholder: string;
+    placeholder?: string;
     events: {
         focusout?: () => void;
         click?: () => void;
