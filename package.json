@@ -36,6 +36,7 @@
     "handlebars": "4.7.7",
     "handlebars-loader": "1.7.2",
     "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.1",
     "jsdom": "20.0.1",
     "mocha": "10.1.0",
     "nanoid": "3.3.4",
@@ -61,5 +62,11 @@
   "dependenciesComments": {
     "rimraf": "We're using rimraf so windows users can delete folders too. We need to delete dist and parcel cache to avoid bugs",
     "nanoid": "Updating past version 3 causes bugs"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test",
+      "pre-push": "npm run test"
+    }
   }
 }
