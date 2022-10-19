@@ -25,7 +25,7 @@ The following are the commands required to run the project on your machine:
 - `$env:PORT="8000" ; npm run start` — same as the above, but the project starts on the port of your choice. For Windows users.
 - `PORT=4444 npm run start` — same as the above, but for Mac users.
 - `npm run test` — runs mocha&Chai tests.
-- `npm run lint` — runs eslint.
+- `npm run lint` — runs eslint and stylelint.
 
 ## Docker usage
 

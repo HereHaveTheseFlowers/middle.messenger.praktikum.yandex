@@ -8,7 +8,7 @@
     "build": "npm run clean && webpack --mode=production --node-env=production",
     "start": "npm run build && node server.js",
     "dev": "npm run build && npm run serve",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src && stylelint ./dist/styles.css",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
