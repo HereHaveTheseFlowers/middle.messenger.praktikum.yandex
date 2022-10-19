@@ -4,6 +4,10 @@ module.exports = {
 		'postcss-sorting': {
 			'properties-order': 'alphabetical',
 		},
-    'autoprefixer': {}
+    'autoprefixer': {},
+    'postcss-hex-format': { 
+		length: "short",
+		case: "lower" 
+	}
 	},
 };
