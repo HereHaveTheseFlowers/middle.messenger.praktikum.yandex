@@ -16,6 +16,13 @@ import UserController from '../../controllers/UserController';
 import { ChatInfo } from '../../api/ChatsAPI';
 import { User } from '../../api/AuthAPI';
 import makeErrorInForm from '../../utils/makeErrorInForm';
+import '../../img/add.svg';
+import '../../img/attachment.svg';
+import '../../img/file.svg';
+import '../../img/location.svg';
+import '../../img/media.svg';
+import '../../img/options.svg';
+import '../../img/remove.svg';
 
 type SelectedChat = { name: string, messages: Array<Record<string, string>> }
 

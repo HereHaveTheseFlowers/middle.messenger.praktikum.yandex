@@ -6,6 +6,7 @@ import { ChatsPage } from './pages/chats/chats';
 import { OptionsPage } from './pages/options/options';
 import { ErrorPage } from './pages/error/error';
 import AuthController from './controllers/AuthController';
+import './styles.sass';
 
 AuthController.fetchUser();
 

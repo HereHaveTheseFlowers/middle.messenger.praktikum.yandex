@@ -9,7 +9,7 @@ export enum WSTransportEvents {
 
 export default class WSTransport extends EventBus {
   private socket: WebSocket | null = null;
-  private pingInterval = 0;
+  private pingInterval: any = 0;
 
   constructor(private url: string) {
     super();

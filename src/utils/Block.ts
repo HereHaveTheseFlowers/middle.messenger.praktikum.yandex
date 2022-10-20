@@ -1,7 +1,6 @@
 import { EventBus } from "./EventBus";
 import { nanoid } from 'nanoid';
 
-// Нельзя создавать экземпляр данного класса
 class Block<P extends Record<string, any> = any> {
   static EVENTS = {
     INIT: "init",
@@ -232,7 +231,8 @@ class Block<P extends Record<string, any> = any> {
     this.getContent()!.style.display = "none";
   }
 
-  public onSubmit(data: Record<string, any>, submitType: string) { /* This gets rewritten by things that extend Block  */ }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public onSubmit(_data: Record<string, any>, _submitType: string) { /* This gets rewritten by things that extend Block  */ }
 
 }
 

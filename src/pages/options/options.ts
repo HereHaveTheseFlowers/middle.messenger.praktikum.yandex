@@ -13,6 +13,7 @@ import setupForm from '../../utils/setupForm';
 import store from '../../utils/Store';
 import UserController from '../../controllers/UserController';
 import { ChangeProfileData, ChangePasswordData } from '../../api/UserAPI';
+import '../../img/avatar.svg';
 
 export class OptionsPage extends Block {
     constructor() {

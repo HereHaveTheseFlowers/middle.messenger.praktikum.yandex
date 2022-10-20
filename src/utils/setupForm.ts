@@ -9,6 +9,7 @@ export default function setupForm(formClass: string, formBlock?: Block, image = 
     const formListener = function(e: Event) {
       e.preventDefault();
       const formData = new FormData(e.target as HTMLFormElement);
+      
       if(image && formBlock) {
         formBlock.onSubmit(formData, formClass);
         return;
@@ -39,7 +40,6 @@ export default function setupForm(formClass: string, formBlock?: Block, image = 
       for(const data of formData) {
         output[data[0].toString()] = data[1].toString();
       }
-
       if(formBlock) formBlock.onSubmit(output, formClass);
     }
     element.removeEventListener('submit', formListener );

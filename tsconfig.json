@@ -1,13 +1,42 @@
 {
+  "ts-node": {
+    "files": true,
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "noImplicitAny": true,
+      "target": "es2016",
+      "allowJs": true,
+      "moduleResolution": "node",
+      "module": "commonjs",
+      //"module": "es6",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "lib": ["ESNext", "DOM", "dom.iterable"],
+      "strict": true,
+      "skipLibCheck": true,
+      //"noImplicitAny": true,
+      //"noUnusedLocals": true,
+      //"noUnusedParameters": true,
+      "sourceMap": true,
+      //"strictNullChecks": true,
+      //"noImplicitReturns": true,
+      "resolveJsonModule": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "src/**/*.test.ts"]
+  },
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
     "target": "es2016",
-    "lib": ["ESNext", "DOM", "dom.iterable"],
+    "allowJs": true,
+    "moduleResolution": "Node",
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext", "DOM", "dom.iterable"],
     "strict": true,
     "skipLibCheck": true,
-    "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
@@ -16,3 +45,4 @@
     "resolveJsonModule": true
   }
 }
+
