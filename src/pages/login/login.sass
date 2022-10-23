@@ -5,6 +5,14 @@
     font-weight: 700
     font-style: normal
     font-size: 32px
+    @media (max-width: 480px)
+        top: 5vw
+        left: 48vw
+        font-size: 9vw
+    @media (min-width: 480px) and (max-width: 1024px)
+        top: 2vw
+        font-size: 3vw
+        right: 3vw
 
 .login__circle
     position: absolute
@@ -17,6 +25,16 @@
     display: flex
     justify-content: center
     align-items: center
+    @media (max-width: 480px)
+        bottom: -44vw
+        height: 120vw
+        left: 17vw
+        width: 120vw
+    @media (min-width: 480px) and (max-width: 1024px)
+        bottom: -31vw
+        height: 75vw
+        left: 50vw
+        width: 76vw
 
 .login__svg
     height: 20vw
@@ -24,10 +42,17 @@
     transform: scale(-1,1)
     fill: $color_light
     top: -30%
+    @media (max-width: 480px)
+        height: 57vw
+        top: -34%
+    @media (min-width: 480px) and (max-width: 1024px)
+        height: 25vw
+        top: -24%
 
 .login__form
     position: absolute
     display: flex
+    justify-content: space-evenly
     flex-direction: column
     align-items: center
     top: 11%
@@ -36,21 +61,33 @@
     background: $color_normal
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
     border-radius: 50px
-    padding: 30px
+    padding: 0 5%
+    @media (max-width: 480px)
+        border-radius: 40px
+        height: 52vw
+        left: 18vw
+        top: 18vw
+        width: 60vw
+    @media (min-width: 480px) and (max-width: 1024px)
+        border-radius: 30px
+        height: 29vw
+        width: 35vw
+        right: 29vw
+        top: 12vw
+
 
 .login__formname
     font-family: 'Inter', sans
     font-style: normal
     font-weight: 500
-    font-size: 20px
     text-align: center
     color: $color_dark
 
 .login__submit
-    margin-top: 28px
+    width: 100%
 
 .login__createaccount
-    margin-top: 21px
+    margin-top: 0
     background: rgba(0,0,0,0)
     font-size: 11px
     width: 100px

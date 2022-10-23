@@ -9,7 +9,7 @@ export class EventBus<
     [K in MapInterface<E>]?: Handler<Args[K]>[]
   } = {};
 
-  on<Event extends MapInterface<E>>(event: Event, callback: () =>void ) {
+  on<Event extends MapInterface<E>>(event: Event, callback: (...args: any[]) => void ) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }

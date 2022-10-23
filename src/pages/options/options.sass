@@ -10,6 +10,12 @@
     display: flex
     justify-content: center
     align-items: center
+    @media (max-width: 740px)
+        left: auto
+        bottom: 30px
+    @media (max-height: 770px)
+        display: none
+
 
 .button__goback:focus
     outline: none
@@ -65,9 +71,15 @@
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
     padding: 23px
     margin-top: 24px
+    @media (max-width: 740px)
+        width: 70vw
+
 
 .options__button
     margin-top: 12px
+    @media (max-width: 480px)
+        width: 100%
+        font-size: 14px
 
 .options__button__changepassword
     float: right

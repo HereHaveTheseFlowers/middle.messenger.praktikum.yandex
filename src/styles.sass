@@ -20,19 +20,33 @@
 
 *
     box-sizing: border-box
+
 html
     font-family: 'Inter', sans-serif
     background: $color_bg
 
 body
     margin: 0
+    position: fixed
+    height: 100vh
+
 *::selection
     color: $color_normal
     background-color: $color_light
     text-shadow: none
     mix-blend-mode: multiply
+
+.hidden
+    display: none !important
+
+h1
+    font-size: 9vw
+
 h2
+    font-size: 2vw
     margin-block: 0
+    @media (max-width: 480px)
+        font-size: 3.5vw
 
 .flexcontainer
     width: 100%
@@ -40,6 +54,8 @@ h2
     display: flex
     justify-content: center
     align-items: center
+    @media (max-width: 480px)
+        flex-direction: column
 
 .flexcontainer__dualcontainer
     width: 50%
@@ -47,6 +63,55 @@ h2
     display: flex
     justify-content: center
     align-items: center
+    @media (max-width: 480px)
+        width: 100%
 
 #app
     height: 100vh
+    overflow: hidden
+    position: relative
+    position: fixed
+    width: 100%
+
+.modal
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14)
+    border-radius: 30px
+    position: absolute
+    background: $color_normal
+    flex-direction: column
+    align-items: center
+    justify-content: space-evenly
+    transition: 0.2s opacity
+
+.modal__button
+    width: 80%
+
+.modal__field
+    width: 80%
+
+.modal__button__close
+    position: absolute
+    right: 15px
+    top: 15px
+    width: 32px
+    height: 32px
+    opacity: 0.3
+    display: flex
+
+.modal__button__close:hover
+    opacity: 0.6
+
+.modal__button__close:before,
+.modal__button__close:after
+    position: absolute
+    left: 15px
+    content: ' '
+    height: 33px
+    width: 2px
+    background-color: #333
+
+.modal__button__close:before
+    transform: rotate(45deg)
+
+.modal__button__close:after
+    transform: rotate(-45deg)
