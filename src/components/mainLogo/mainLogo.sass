@@ -7,16 +7,28 @@
     display: flex
     justify-content: center
     align-items: center
+    @media (max-width: 480px)
+        height: 70vw
+        width: 70vw
+        right: 50vw
+        position: absolute
+        top: 30vw
+    @media (min-width: 480px) and (max-width: 1024px)
+        top: 4vw
+        left: 4vw
+        position: absolute
 
 .mainlogo__svg
     height: 35vw
     position: absolute
     fill: $color_bg
+    @media (max-width: 480px)
+        height: 54vw
 
 .mainlogo__title
     margin: 70% 0 0 0
     font-style: normal
     font-weight: 700
-    font-size: 4vw
+    font-size: 5vw
     text-align: center
     color: $color_bg

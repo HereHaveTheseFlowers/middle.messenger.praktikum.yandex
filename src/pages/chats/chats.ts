@@ -16,6 +16,7 @@ import UserController from '../../controllers/UserController';
 import { ChatInfo } from '../../api/ChatsAPI';
 import { User } from '../../api/AuthAPI';
 import makeErrorInForm from '../../utils/makeErrorInForm';
+import fade from '../../utils/fade';
 import '../../img/add.svg';
 import '../../img/attachment.svg';
 import '../../img/file.svg';
@@ -63,16 +64,7 @@ export class ChatsPage extends Block {
             events: {
               click: () => { 
                 animateClick(this.children.buttonAttachment.element);
-                const attachmentmenu: HTMLElement | null = document.querySelector(".attachmentmenu")
-                if(!attachmentmenu) {
-                    return;
-                }
-                if(attachmentmenu.style.display !== "flex") {
-                    attachmentmenu.style.display = "flex"
-                }
-                else {
-                    attachmentmenu.style.display = ""
-                }
+                fade(".attachmentmenu");
               }
             }
         });
@@ -102,22 +94,39 @@ export class ChatsPage extends Block {
             }
           }
         });
+        this.children.buttonMobileChatList = new Button({
+          label: "Hide Chats",
+          addedClassList: ["chatlist__mobilechatsbutton"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonMobileChatList.element);
+              setTimeout(() =>  {
+                const chatList = document.querySelector('.chatlist__list') as HTMLElement;
+                const chatSearch = document.querySelector('.chatlist__search') as HTMLElement;
+                const chatsPanel = document.querySelector('.chatlist') as HTMLElement;
+                const selectedChat = document.querySelector('.selectedchat') as HTMLElement;
+                if(!chatList || !chatSearch || !chatsPanel) return;
+                chatList.hidden = !chatList.hidden
+                chatSearch.style.display = chatSearch.style.display === 'none' ? 'block' : 'none';
+                chatsPanel.style.height = !chatsPanel.style.height || chatsPanel.style.height === '50%' ? '6%' : '50%';
+                selectedChat.style.height = !selectedChat.style.height || selectedChat.style.height === '50%' ? '94%' : '50%';
+                if(this.children.buttonMobileChatList.props.label === "Show Chats") {
+                  this.children.buttonMobileChatList.props.label = "Hide Chats";
+                } else {
+                  this.children.buttonMobileChatList.props.label = "Show Chats";
+                }
+              }, 400);
+            }
+          }
+        });
         this.children.buttonOptions = new Button({
           label: "",
           addedClassList: ["selectedchat__optionsbutton"],
           type: "button",
           events: {
-            click: () => { 
-              const optionsmenu: HTMLElement | null = document.querySelector(".optionsmenu")
-              if(!optionsmenu) {
-                  return;
-              }
-              if(optionsmenu.style.display !== "flex") {
-                optionsmenu.style.display = "flex"
-              }
-              else {
-                optionsmenu.style.display = ""
-              }
+            click: () => {
+              fade(".optionsmenu");
             }
           }
         });
@@ -126,16 +135,8 @@ export class ChatsPage extends Block {
           addedClassList: ["menu__button"],
           events: {
             click: () => { 
-              const addusermenu: HTMLElement | null = document.querySelector(".addusermenu")
-              if(!addusermenu) {
-                  return;
-              }
-              if(addusermenu.style.display !== "flex") {
-                addusermenu.style.display = "flex"
-              }
-              else {
-                addusermenu.style.display = ""
-              }
+              animateClick(this.children.buttonAddUserMenu.element);
+              fade(".addusermenu");
             }
           }
         });
@@ -143,13 +144,14 @@ export class ChatsPage extends Block {
           name: "login",
           type: "text",
           placeholder: "Login",
-          divClassList: ["auth__field"],
+          divClassList: ["auth__field", "modal__field"],
           inputClass: "auth__input",
           events: {}
         });
         this.children.buttonAddUser = new Button({
           label: "Add",
           bgshape: true,
+          addedClassList: ["modal__button"],
           events: {
             click: () => {
               animateClick(this.children.buttonAddUser.element);
@@ -161,16 +163,8 @@ export class ChatsPage extends Block {
           addedClassList: ["menu__button"],
           events: {
             click: () => { 
-              const removeusermenu: HTMLElement | null = document.querySelector(".removeusermenu")
-              if(!removeusermenu) {
-                  return;
-              }
-              if(removeusermenu.style.display !== "flex") {
-                removeusermenu.style.display = "flex"
-              }
-              else {
-                removeusermenu.style.display = ""
-              }
+              animateClick(this.children.buttonRemoveUserMenu.element);
+              fade(".removeusermenu");
             }
           }
         });
@@ -178,12 +172,13 @@ export class ChatsPage extends Block {
           name: "login",
           type: "text",
           placeholder: "Login",
-          divClassList: ["auth__field"],
+          divClassList: ["auth__field", "modal__field"],
           inputClass: "auth__input",
           events: {}
         });
         this.children.buttonRemoveUser = new Button({
           label: "Delete",
+          addedClassList: ["modal__button"],
           bgshape: true,
           events: {
             click: () => {
@@ -195,17 +190,9 @@ export class ChatsPage extends Block {
           label: "Create Chat",
           addedClassList: ["menu__button", "chatlist__createbutton"],
           events: {
-            click: () => { 
-              const createchatmenu: HTMLElement | null = document.querySelector(".createchatmenu")
-              if(!createchatmenu) {
-                  return;
-              }
-              if(createchatmenu.style.display !== "flex") {
-                createchatmenu.style.display = "flex"
-              }
-              else {
-                createchatmenu.style.display = ""
-              }
+            click: () => {
+              animateClick(this.children.buttonCreateChatMenu.element);
+              fade(".createchatmenu");
             }
           }
         });
@@ -213,13 +200,14 @@ export class ChatsPage extends Block {
           name: "chatname",
           type: "text",
           placeholder: "Chat Name",
-          divClassList: ["auth__field"],
+          divClassList: ["auth__field", "modal__field"],
           inputClass: "auth__input",
           events: {}
         });
         this.children.buttonCreateChat = new Button({
           label: "Create",
           bgshape: true,
+          addedClassList: ["modal__button"],
           events: {
             click: () => {
               animateClick(this.children.buttonCreateChat.element);
@@ -230,26 +218,63 @@ export class ChatsPage extends Block {
           label: "Delete Chat",
           addedClassList: ["menu__button"],
           events: {
-            click: () => { 
-              const removechatmenu: HTMLElement | null = document.querySelector(".removechatmenu")
-              if(!removechatmenu) {
-                  return;
-              }
-              if(removechatmenu.style.display !== "flex") {
-                removechatmenu.style.display = "flex"
-              }
-              else {
-                removechatmenu.style.display = ""
-              }
+            click: () => {
+              animateClick(this.children.buttonRemoveChatMenu.element);
+              fade(".removechatmenu");
             }
           }
         });
         this.children.buttonRemoveChat = new Button({
           label: "Yes",
+          addedClassList: ["modal__button"],
           bgshape: true,
           events: {
             click: () => {
               animateClick(this.children.buttonRemoveChat.element);
+            }
+          }
+        });
+        this.children.buttonCloseAdd = new Button({
+          label: "",
+          addedClassList: ["modal__button__close"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonCloseAdd.element);
+              fade('.addusermenu', 'out');
+            }
+          }
+        });
+        this.children.buttonCloseRemove = new Button({
+          label: "",
+          addedClassList: ["modal__button__close"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonCloseRemove.element);
+              fade('.removeusermenu', 'out');
+            }
+          }
+        });
+        this.children.buttonCloseCreate = new Button({
+          label: "",
+          addedClassList: ["modal__button__close"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonCloseCreate.element);
+              fade('.createchatmenu', 'out');
+            }
+          }
+        });
+        this.children.buttonCloseRemoveChat = new Button({
+          label: "",
+          addedClassList: ["modal__button__close"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonCloseRemoveChat.element);
+              fade('.removechatmenu', 'out');
             }
           }
         });

@@ -1,16 +1,17 @@
 
 <div class="chatlist">
     {{{buttonLogout}}}
+    {{{buttonMobileChatList}}}
     {{{buttonProfile}}}
     <input type="text" class="chatlist__search" name="chatsearch" placeholder="Search" autocomplete="off">
     <div class="chatlist__list">
-        {{#each chatsList}}
-            {{{this}}}
-        {{/each}} 
         <div class="menu__section chatlist__create">
             <div class="menu__image optionsmenu__image__add"></div>
             {{{buttonCreateChatMenu}}}
         </div>
+        {{#each chatsList}}
+            {{{this}}}
+        {{/each}} 
     </div>
 </div>
 <div class="selectedchat">
@@ -24,7 +25,7 @@
     </div>
     <form class="selectedchat__messagefield">
         {{{buttonAttachment}}}
-        <div class="menu attachmentmenu">
+        <div class="menu attachmentmenu hidden">
             <div class="menu__section">
                 <div class="menu__image attachmentmenu__image__media"></div>
                 <span class="menu__button">Photo or Video</span>
@@ -46,7 +47,7 @@
     {{else}}
     Choose a chat to send messages
     {{/if}}
-    <div class="menu optionsmenu">
+    <div class="menu optionsmenu hidden">
         <div class="menu__section">
             <div class="menu__image optionsmenu__image__add"></div>
             {{{buttonAddUserMenu}}}
@@ -60,23 +61,27 @@
             {{{buttonRemoveChatMenu}}}
         </div>
     </div>
-    <form class="menu addusermenu">
+    <form class="modal chatsmodal addusermenu hidden">
+        {{{buttonCloseAdd}}}
         Add a user
-        <div style="width: 280px">{{{inputAddUser}}}</div>
+        {{{inputAddUser}}}
         {{{buttonAddUser}}}
     </form>
-    <form class="menu removeusermenu">
+    <form class="modal chatsmodal removeusermenu hidden">
+        {{{buttonCloseRemove}}}
         Delete user
-        <div style="width: 280px">{{{inputRemoveUser}}}</div>
+        {{{inputRemoveUser}}}
         {{{buttonRemoveUser}}}
     </form>
-    <form class="menu createchatmenu">
+    <form class="modal chatsmodal createchatmenu hidden">
+        {{{buttonCloseCreate}}}
         Enter chat name
-        <div style="width: 280px">{{{inputCreateChat}}}</div>
+        {{{inputCreateChat}}}
         {{{buttonCreateChat}}}
     </form>
-    <form class="menu removechatmenu">
-        Are you sure you want to delete this chat?
+    <form class="modal chatsmodal removechatmenu hidden">
+        {{{buttonCloseRemoveChat}}}
+        <span style="width: 80%; text-align: center; font-size: 16px">Are you sure you want to delete this chat?</span>
         {{{buttonRemoveChat}}}
     </form>
 </div>

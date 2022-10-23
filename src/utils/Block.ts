@@ -94,13 +94,16 @@ class Block<P extends Record<string, any> = any> {
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  private _componentDidUpdate() {
-    if (this.componentDidUpdate()) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
+    if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  protected componentDidUpdate() {
+  protected componentDidUpdate(oldProps: P, newProps: P) {
+    if(oldProps && newProps.messageDir) {
+      return false;
+    }
     return true;
   }
 
@@ -224,7 +227,7 @@ class Block<P extends Record<string, any> = any> {
   }
 
   show() {
-    this.getContent()!.style.display = "block";
+    this.getContent()!.style.display = "flex";
   }
 
   hide() {

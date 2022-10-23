@@ -3,7 +3,7 @@ import { InputProps } from '../../components/input';
 export const inputsList: Array<InputProps> = 
 [ 
     { 
-        divClassList: ["registration__field", "auth__field"],
+        divClassList: ["auth__field"],
         events: {
         },
         inputClass: "auth__input",
@@ -12,7 +12,7 @@ export const inputsList: Array<InputProps> =
         placeholder: "Email"
     }, 
     { 
-        divClassList: ["registration__field", "auth__field"],
+        divClassList: ["auth__field"],
         events: {
         },
         inputClass: "auth__input",
@@ -21,7 +21,7 @@ export const inputsList: Array<InputProps> =
         placeholder: "Login"
     }, 
     { 
-        divClassList: ["registration__field", "auth__field"],
+        divClassList: ["auth__field"],
         events: {
         },
         inputClass: "auth__input",
@@ -30,7 +30,7 @@ export const inputsList: Array<InputProps> =
         placeholder: "First Name"
     }, 
     { 
-        divClassList: ["registration__field", "auth__field"],
+        divClassList: ["auth__field"],
         events: { 
         },
         inputClass: "auth__input",
@@ -39,7 +39,7 @@ export const inputsList: Array<InputProps> =
         placeholder: "Last Name"
     }, 
     { 
-        divClassList: ["registration__field", "auth__field"],
+        divClassList: ["auth__field"],
         events: { 
         },
         inputClass: "auth__input",
@@ -48,7 +48,7 @@ export const inputsList: Array<InputProps> =
         placeholder: "Phone"
     }, 
     { 
-        divClassList: ["registration__field", "auth__field"],
+        divClassList: ["auth__field"],
         events: { 
         },
         inputClass: "auth__input",
@@ -57,7 +57,7 @@ export const inputsList: Array<InputProps> =
         placeholder: "Password"
     }, 
     { 
-        divClassList: ["registration__field", "auth__field"],
+        divClassList: ["auth__field"],
         events: { 
         },
         inputClass: "auth__input",

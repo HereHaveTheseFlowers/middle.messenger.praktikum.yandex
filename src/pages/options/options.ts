@@ -80,6 +80,7 @@ export class OptionsPage extends Block {
           });
         this.children.buttonAvatarUpload = new Button({
             label: "Submit",
+            bgshape: true,
             events: {
               click: () => { 
                 animateClick(this.children.buttonAvatarUpload.element);
