@@ -83,6 +83,7 @@ class Router {
         const route = this.getRoute(pathname);
 
         if (!route) {
+            this.go('/404');
             return;
         }
 
@@ -96,9 +97,8 @@ class Router {
     }
 
     public go(pathname: string) {
-        if(pathname !== '/' && pathname !== '/sign-up' && !store.getState().user) {
+        if(pathname !== '/' && pathname !== '/sign-up' && pathname !== '/404' && pathname !== '/500' && !store.getState().user) {
             this.go('/');
-            console.log('Please sign in first');
             return;
         }
         this.history.pushState({}, '', pathname);

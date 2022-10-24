@@ -1,48 +1,40 @@
 import { validateForm } from './validate';
 import hasClass from './hasClass';
 import Block from './Block';
+import makeErrorInForm from './makeErrorInForm';
 
-
-export default function setupForm(formClass: string, formBlock?: Block, image = false) {
+const handlers: Record<string, (...args: Event[])=>void > = {};
+const formSubmit = function(formClass: string, formBlock: Block, image: boolean) {
+  return handlers[formClass] || (handlers[formClass] =  function curried_func(e: Event) {
+    e.preventDefault();
     const element = document.querySelector('.' + formClass);
     if(!element) return;
-    const formListener = function(e: Event) {
-      e.preventDefault();
-      const formData = new FormData(e.target as HTMLFormElement);
-      
-      if(image && formBlock) {
-        formBlock.onSubmit(formData, formClass);
-        return;
-      }
-      const { error, req } = validateForm(formData);
-      for(let i = 0; i <= element.children.length; i++) {
-        if(hasClass(element.lastChild as HTMLElement, "input__error")) {
-          element.removeChild(element.lastChild as HTMLElement);
-        }
-      }
-      if(error) {
-        const errorDiv = document.createElement("div");
-        errorDiv.classList.add("input__error");
-        const errorIcon = document.createElement("span");
-        errorIcon.innerHTML = "&#9888; ";
-        errorDiv.append(errorIcon);
-        errorDiv.textContent += req;
-        errorDiv.style.zIndex = "6000";
-        errorDiv.addEventListener('click', (e) => {
-          e.preventDefault();
-          errorDiv.style.display = 'none';
-        });
-        element.append(errorDiv);
-        return;
-      }
-
-      const output: Record<string, string> = {};
-      for(const data of formData) {
-        output[data[0].toString()] = data[1].toString();
-      }
-      if(formBlock) formBlock.onSubmit(output, formClass);
+    const formData = new FormData(e.target as HTMLFormElement);
+    if(image && formBlock) {
+      formBlock.onSubmit(formData, formClass);
+      return;
     }
-    element.removeEventListener('submit', formListener );
-    element.addEventListener('submit', formListener );
+    const { error, req } = validateForm(formData);
+    for(let i = 0; i <= element.children.length; i++) {
+      if(hasClass(element.lastChild as HTMLElement, "input__error")) {
+        element.removeChild(element.lastChild as HTMLElement);
+      }
+    }
+    if(error) {
+      makeErrorInForm(formClass, req);
+    }
+    const output: Record<string, string> = {};
+    for(const data of formData) {
+      output[data[0].toString()] = data[1].toString();
+    }
+    formBlock.onSubmit(output, formClass);
+  })
+}
+
+export default function setupForm(formClass: string, formBlock: Block, image = false) {
+    const element = document.querySelector('.' + formClass);
+    if(!element) return;
+    element.removeEventListener('submit', formSubmit(formClass, formBlock, image));
+    element.addEventListener('submit', formSubmit(formClass, formBlock, image));
 }
 

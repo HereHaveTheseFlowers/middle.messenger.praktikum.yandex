@@ -365,7 +365,6 @@ export class ChatsPage extends Block {
         (async () => {
           const foundUser: Array<User> | boolean = await UserController.searchUser({ login: data.login });
           if(foundUser && foundUser[0]) {
-            console.log(foundUser[0])
             ChatsController.removeUserFromChat(store.getState().selectedChat, foundUser[0].id)
           } else {
             makeErrorInForm(submitType, "Couldn't find that user")
