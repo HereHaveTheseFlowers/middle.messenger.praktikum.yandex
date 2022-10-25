@@ -65,5 +65,10 @@
   "dependenciesComments": {
     "rimraf": "We're using rimraf so windows users can delete folders too. We need to delete dist and parcel cache to avoid bugs",
     "nanoid": "Updating past version 3 causes bugs"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   }
 }

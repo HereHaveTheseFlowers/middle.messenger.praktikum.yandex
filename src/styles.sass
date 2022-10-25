@@ -104,8 +104,8 @@ h2
 .modal__button__close:hover
     opacity: 0.6
 
-.modal__button__close:before,
-.modal__button__close:after
+.modal__button__close::before,
+.modal__button__close::after
     position: absolute
     left: 15px
     content: ' '
@@ -113,8 +113,8 @@ h2
     width: 2px
     background-color: #333
 
-.modal__button__close:before
+.modal__button__close::before
     transform: rotate(45deg)
 
-.modal__button__close:after
+.modal__button__close::after
     transform: rotate(-45deg)

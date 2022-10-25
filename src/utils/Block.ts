@@ -1,4 +1,4 @@
-import { EventBus } from "./EventBus";
+import { EventBus } from './EventBus';
 import { nanoid } from 'nanoid';
 
 class Block<P extends Record<string, any> = any> {
@@ -101,10 +101,18 @@ class Block<P extends Record<string, any> = any> {
   }
 
   protected componentDidUpdate(oldProps: P, newProps: P) {
-    if(oldProps && newProps.messageDir) {
-      return false;
+    const diff: string[] = [];
+    for(const propKey in newProps) {
+      if(oldProps[propKey] !== newProps[propKey]) {
+        diff.push(propKey);
+      }
     }
-    return true;
+    for(const propKey of diff) {
+      if(propKey && propKey !== 'messageDir') {
+        return true;
+      }
+    }
+    return false;
   }
 
   setProps = (nextProps: P) => {
