@@ -27,7 +27,7 @@ export class Input extends Block<InputProps> {
         this.props.events = {
             focusout: () => {
                 const { error, req } = validateInput(this);
-                if(error) {
+                if(error && req !== "") {
                     this.element?.append(this.createError(req));
                 }
                 else {

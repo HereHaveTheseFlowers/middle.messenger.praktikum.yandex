@@ -22,6 +22,7 @@ const formSubmit = function(formClass: string, formBlock: Block, image: boolean)
     }
     if(error) {
       makeErrorInForm(formClass, req);
+      return;
     }
     const output: Record<string, string> = {};
     for(const data of formData) {

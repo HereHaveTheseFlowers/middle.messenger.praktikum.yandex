@@ -52,6 +52,7 @@ function validate(value: string, inputType: string): { error: boolean, req: stri
             requirements = "Should not be empty."
             break;
     }
+    if(value === "") requirements = "";
     if (pattern.test(value)) {
         return { error: false, req: requirements };
     }

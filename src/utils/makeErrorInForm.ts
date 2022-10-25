@@ -1,4 +1,5 @@
 export default function makeErrorInForm(formClass: string, errorText: string) {
+    if(errorText === "") return;
     const errorForm = document.querySelector('.'+formClass);
     if(!errorForm) return;
     const errorDiv = document.createElement("div");
