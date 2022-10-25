@@ -43,6 +43,7 @@ export class ChatsPage extends Block {
         if(this.element) this.element.classList.add("flexcontainer")
     }
     init() {
+        this.props.Mobile = window.innerWidth <= 480 ? true : false;
         store.on('chats', () => {
           if(store.getState() && store.getState().chats) {
             this.childrenCollection.chatsList = store.getState().chats.map((chat: ChatInfo) => new Chat(chat))
@@ -77,7 +78,7 @@ export class ChatsPage extends Block {
               animateClick(this.children.buttonLogout.element);
               setTimeout( async () =>  {
                 await AuthController.logout();
-              }, 400);
+              }, 200);
             }
           }
         });
@@ -88,35 +89,18 @@ export class ChatsPage extends Block {
           events: {
             click: () => { 
               animateClick(this.children.buttonProfile.element);
-              setTimeout(() =>  {
-                Router.go('/settings')
-              }, 400);
+              Router.go('/settings')
             }
           }
         });
         this.children.buttonMobileChatList = new Button({
-          label: "Hide Chats",
+          label: "Chats",
           addedClassList: ["chatlist__mobilechatsbutton"],
           type: "button",
           events: {
             click: () => { 
               animateClick(this.children.buttonMobileChatList.element);
-              setTimeout(() =>  {
-                const chatList = document.querySelector('.chatlist__list') as HTMLElement;
-                const chatSearch = document.querySelector('.chatlist__search') as HTMLElement;
-                const chatsPanel = document.querySelector('.chatlist') as HTMLElement;
-                const selectedChat = document.querySelector('.selectedchat') as HTMLElement;
-                if(!chatList || !chatSearch || !chatsPanel) return;
-                chatList.hidden = !chatList.hidden
-                chatSearch.style.display = chatSearch.style.display === 'none' ? 'block' : 'none';
-                chatsPanel.style.height = !chatsPanel.style.height || chatsPanel.style.height === '50%' ? '6%' : '50%';
-                selectedChat.style.height = !selectedChat.style.height || selectedChat.style.height === '50%' ? '94%' : '50%';
-                if(this.children.buttonMobileChatList.props.label === "Show Chats") {
-                  this.children.buttonMobileChatList.props.label = "Hide Chats";
-                } else {
-                  this.children.buttonMobileChatList.props.label = "Show Chats";
-                }
-              }, 400);
+              fade(".chatslistmobile");
             }
           }
         });
@@ -275,6 +259,17 @@ export class ChatsPage extends Block {
             click: () => { 
               animateClick(this.children.buttonCloseRemoveChat.element);
               fade('.removechatmenu', 'out');
+            }
+          }
+        });
+        this.children.buttonCloseChatsListMobile = new Button({
+          label: "",
+          addedClassList: ["modal__button__close", "chatslistmobile__button"],
+          type: "button",
+          events: {
+            click: () => { 
+              animateClick(this.children.buttonCloseChatsListMobile.element);
+              fade('.chatslistmobile', 'out');
             }
           }
         });

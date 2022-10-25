@@ -3,6 +3,8 @@
     {{{buttonLogout}}}
     {{{buttonMobileChatList}}}
     {{{buttonProfile}}}
+    {{#if Mobile}}
+    {{else}}
     <input type="text" class="chatlist__search" name="chatsearch" placeholder="Search" autocomplete="off">
     <div class="chatlist__list">
         <div class="menu__section chatlist__create">
@@ -13,6 +15,7 @@
             {{{this}}}
         {{/each}} 
     </div>
+    {{/if}}
 </div>
 <div class="selectedchat">
     {{#if selectedChat}}
@@ -46,6 +49,21 @@
     </form>
     {{else}}
     Choose a chat to send messages
+    {{/if}}
+    {{#if Mobile}}
+    <div class="modal chatslistmobile hidden">
+        <input type="text" class="chatlist__search" name="chatsearch" placeholder="Search" autocomplete="off">
+        <div class="chatlist__list">
+            <div class="menu__section chatlist__create">
+                <div class="menu__image optionsmenu__image__add"></div>
+                {{{buttonCreateChatMenu}}}
+            </div>
+            {{#each chatsList}}
+                {{{this}}}
+            {{/each}} 
+        </div>
+        {{{buttonCloseChatsListMobile}}}
+    </div>
     {{/if}}
     <div class="menu optionsmenu hidden">
         <div class="menu__section">
