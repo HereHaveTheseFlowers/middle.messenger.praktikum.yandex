@@ -6,6 +6,17 @@ import { OptionsPage } from './pages/options/options';
 import { ErrorPage } from './pages/error/error';
 import AuthController from './controllers/AuthController';
 import './styles.sass';
+import './img/favicon.ico';
+import './img/favicon-16x16.png';
+import './img/favicon-32x32.png';
+import './img/apple-touch-icon.png';
+import './img/safari-pinned-tab.svg';
+import './img/browserconfig.xml';
+import './img/android-chrome-192x192.png';
+import './img/android-chrome-512x512.png';
+import './img/apple-touch-icon.png';
+import './img/mstile-150x150.png';
+import './img/site.webmanifest';
 
 /* Mobile viewport height hack */
 let timeoutId: NodeJS.Timeout | null = null;

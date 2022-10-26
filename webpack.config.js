@@ -72,7 +72,7 @@ const config = {
                 loader: "handlebars-loader"
             },
             {
-                test: /\.(svg)$/i,
+                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|webmanifest|xml|ico)$/i,
                 use: [                
                     {
                     loader: 'file-loader',
