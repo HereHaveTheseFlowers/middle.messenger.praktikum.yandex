@@ -9,11 +9,11 @@
 This is a full-working web messenger, which, among other things, can send messages via WebSocket. Building via Webpack and virtualization via Docker are set up, the project is auto-deployed to Heroku, linters are connected. This is my project for the Yandex "Middle-Frontend" Course.
 </p>
 
-## Demo
+## Deployment
 
-You can check the demo launched on heroku here:
-https://herehavetheseflowers-vacate.herokuapp.com/
-<a href="https://herehavetheseflowers-vacate.herokuapp.com" target="_blank" rel="noopener noreferrer">
+You can check the demo launched on vercel here:
+https://middle-messenger-praktikum-yandex-zeta.vercel.app
+<a href="https://middle-messenger-praktikum-yandex-zeta.vercel.app" target="_blank" rel="noopener noreferrer">
 <img src="https://user-images.githubusercontent.com/106176669/198018966-532e033a-c1c3-4137-8882-8da6bd2651c5.png" alt="vacate-showcase-2" style="max-width: 100%;" draggable="false">
 </a>
 
@@ -26,7 +26,7 @@ https://herehavetheseflowers-vacate.herokuapp.com/
 - Mocha & Chai
 - Eslint and stylelint
 - Docker
-- Auto-deploy to Heroku
+- Auto-deploy to Heroku (heroku is dead, now Vercel)
 
 ## Installation
 The following are the commands required to run the project on your machine:
