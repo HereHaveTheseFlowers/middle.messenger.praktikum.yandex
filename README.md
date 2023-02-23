@@ -1,4 +1,4 @@
-<a href="https://herehavetheseflowers-vacate.herokuapp.com" target="_blank" rel="noopener noreferrer">
+<a href="https://middle-messenger-praktikum-yandex-zeta.vercel.app" target="_blank" rel="noopener noreferrer">
 <p align="center">
  <img src="https://user-images.githubusercontent.com/106176669/198019198-45e8703f-c342-48ac-94e5-1e7871631cfe.png" alt="logo" width="250" draggable="false">
 </p>
