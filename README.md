@@ -5,7 +5,7 @@
 </a>
 <p align="center">
   <span>English</span> |
-  <a href="https://github.com/HereHaveTheseFlowers/middle.messenger.praktikum.yandex/blob/main/README.ru.md">Русский</a>
+  <a href="https://github.com/HereHaveTheseFlowers/middle.messenger.praktikum.yandex/blob/main/README.ru.MD">Русский</a>
 </p>
 
 ## **<p align="center">Vacate - a simple, yet cozy & comfortable web chat!</p>**
