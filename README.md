@@ -3,6 +3,10 @@
  <img src="https://user-images.githubusercontent.com/106176669/198019198-45e8703f-c342-48ac-94e5-1e7871631cfe.png" alt="logo" width="250" draggable="false">
 </p>
 </a>
+<p align="center">
+  <span>English</span> |
+  <a href="https://github.com/HereHaveTheseFlowers/middle.messenger.praktikum.yandex/blob/main/README.ru.md">Русский</a>
+</p>
 
 ## **<p align="center">Vacate - a simple, yet cozy & comfortable web chat!</p>**
 <p align="center">
