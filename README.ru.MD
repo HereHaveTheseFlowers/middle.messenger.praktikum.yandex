@@ -4,6 +4,11 @@
 </p>
 </a>
 
+<p align="center">
+  <a href="https://github.com/HereHaveTheseFlowers/middle.messenger.praktikum.yandex/blob/main/README.md">English</a> |
+  <span>Русский</span>
+</p>
+
 ## **<p align="center">Vacate - простой и уютный веб-мессенджер!</p>**
 <p align="center">
 Vacate - полноценный веб-мессенджер, который, помимо всего прочего, умеет отправлять сообщения через WebSocket. Настроена сборка через Webpack и виртуализация через Docker, проект автодеплоен на Vercel, подключены линтеры. Данный проект был выполнен для курса "Миддл-фронтенд Разработчик" от Яндекс Практикума.
